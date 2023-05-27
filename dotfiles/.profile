@@ -16,7 +16,6 @@ export MOZ_DBUS_REMOTE=1
 
 export XDG_CURRENT_DESKTOP=sway
 export QT_QPA_PLATFORM="wayland-egl"
-export WLR_NO_HARDWARE_CURSORS=1
 
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 export LIBVA_DRIVER_NAME=radeonsi

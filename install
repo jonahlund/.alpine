@@ -21,7 +21,7 @@ sudo apk add wayland xwayland wl-clipboard
 sudo apk add sway swaylock swaybg swayidle
 
 # Install user packages
-sudo apk add docker firefox-developer-edition neovim font-jetbrains-mono-nerd alacritty tmux rustup nodejs yarn npm lua-language-server stylua
+sudo apk add docker docker-cli-compose firefox-developer-edition neovim font-jetbrains-mono-nerd alacritty tmux rustup nodejs yarn npm lua-language-server stylua
 
 # Install node packages
 yarn global add typescript typescript-language-server
