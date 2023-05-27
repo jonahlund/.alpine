@@ -44,6 +44,7 @@ rustup-init -y --default-toolchain nightly
 source "$DOT/.profile"
 
 # Install cargo binaries
+cargo install cargo-binstall
 cargo binstall cargo-generate cargo-leptos ncspot ripgrep kickoff --locked
 
 # Link dotfiles
