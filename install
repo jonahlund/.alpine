@@ -1,0 +1,56 @@
+#!/bin/sh
+
+sudo apk update
+sudo apk upgrade
+
+DIR="$(dirname "$(realpath "$0")")"
+DOT=$DIR/dotfiles
+
+# Install base packages
+sudo apk add build-base cmake openssl-dev pulseaudio python3 xcb-util-dev xcb-util-renderutil-dev xcb-util-image-dev tar udev dbus seatd cmd:seatd-launch fontconfig-dev curl wget
+
+# Install drivers
+sudo apk add mkinitfs linux-firmware-amdgpu mesa mesa-dri-gallium mesa-va-gallium
+sudo echo amdgpu >> /etc/modules
+sudo echo fbcon >> /etc/modules
+
+# Install wayland
+sudo apk add wayland xwayland wl-clipboard
+
+# Install sway
+sudo apk add sway swaylock swaybg swayidle
+
+# Install user packages
+sudo apk add docker firefox-developer-edition neovim font-jetbrains-mono-nerd alacritty tmux rustup nodejs yarn npm lua-language-server stylua
+
+# Install node packages
+yarn global add typescript typescript-language-server
+
+# Install neovim
+mkdir -p ~/.config
+git clone https://github.com/NvChad/NvChad.git --depth 1 ~/.config/nvim
+
+# Setup services
+sudo setup-devd udev
+echo $(sudo dbus-uuidgen) | sudo tee /var/lib/dbus/machine-id >/dev/null
+sudo rc-update add dbus
+sudo rc-update add seatd default
+
+# Add user to groups
+for group in input video seat; do sudo adduser $USER $group; done
+
+# Setup rust
+rustup-init -y --default-toolchain nightly
+source "$DOT/.profile"
+
+# Install cargo binaries
+cargo binstall cargo-generate cargo-leptos ncspot ripgrep kickoff --locked
+
+# Link dotfiles
+./lnx $DOT/sway ~/.config/sway
+./lnx $DOT/alacritty ~/.config/alacritty
+./lnx $DOT/nvim ~/.config/nvim
+./lnx $DOT/ncspot ~/.config/ncspot
+ln -sf $DOT/.tmux.conf ~/.tmux.conf
+ln -sf $DOT/.gitconfig ~/.gitconfig
+ln -sf $DOT/.profile ~/.profile

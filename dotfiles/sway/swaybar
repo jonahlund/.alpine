@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Nord theme colors
+COLOR1=#d8dee9
+COLOR2=#eceff4
+
+INTERFACE="eth0"
+
+get_cpu_usage() {
+    awk '/^cpu / {usage=($2+$4)*100/($2+$4+$5)} END {printf "%.2f%%", usage}' /proc/stat
+}
+
+get_ram_usage() {
+    free -m | awk 'NR==2 {printf "%d MB / %d MB", $3, $2}'
+}
+
+get_disk_usage() {
+    df -h / | awk 'NR==2 {printf "%s/%s", $3, $2}'
+}
+
+while true; do
+    cpu_usage=$(get_cpu_usage)
+    ram_usage=$(get_ram_usage)
+    date_output=$(date +'%a %-d %b %H:%M')
+
+    echo "<span font_weight=\"600\"><span foreground=\"${COLOR1}\">$cpu_usage</span>  <span foreground=\"${COLOR1}\">$ram_usage</span>  <span foreground=\"${COLOR1}\">$date_output</span></span>"
+    sleep 5
+done
