@@ -12,14 +12,22 @@ if test -z "${XDG_RUNTIME_DIR}"; then
 fi
 
 # Link dotfiles
+# Sway
 rm -rf ~/.config/sway
 ln -sf $DOT/sway ~/.config/sway
+# Alacritty
 rm -rf ~/.config/alacritty
 ln -sf $DOT/alacritty ~/.config/alacritty
+# Neovim
 rm -rf ~/.config/nvim
-ln -sf $DOT/nvim ~/.config/nvim
+git clone https://github.com/NvChad/NvChad.git --depth 1 ~/.config/nvim
+rm -rf ~/.config/nvim/lua/custom
+ln -sf $DOT/nvim/lua/custom ~/.config/nvim/lua/custom
+ln -sf $DOT/nvim/lua/.stylua.toml ~/.config/nvim/stylua.toml
+# Ncspot
 rm -rf ~/.config/ncspot
 ln -sf $DOT/ncspot ~/.config/ncspot
+# Dotfiles
 ln -sf $DOT/.tmux.conf ~/.tmux.conf
 ln -sf $DOT/.gitconfig ~/.gitconfig
 ln -sf $DOT/.profile ~/.profile

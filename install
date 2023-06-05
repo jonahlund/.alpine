@@ -12,23 +12,12 @@ sudo apk update && sudo apk upgrade
 # Function to add a user to groups if not already added
 add_user_to_group() {
     for group in "$@"; do
-        if ! id -nGz "$USER" | grep -qzxF "$group"; then
-            sudo adduser $USER $group
-        fi
-    done
-}
-
-# Install packages
-install_packages() {
-    for pkg in "$@"; do
-        if ! apk info -e "$pkg" >/dev/null 2>&1; then
-            sudo apk add $pkg
-        fi
+        sudo adduser $USER $group
     done
 }
 
 # Install Development Essentials
-install_packages \
+sudo apk add \
     build-base \
     cmake \
     openssl-dev \
@@ -40,13 +29,13 @@ install_packages \
     fontconfig-dev
 
 # Install XCB-related packages
-install_packages \
+sudo apk add \
     xcb-util-dev \
     xcb-util-renderutil-dev \
     xcb-util-image-dev
 
 # Install Audio/Video related packages
-install_packages \
+sudo apk add \
     pulseaudio \
     linux-firmware-amdgpu \
     mesa \
@@ -54,7 +43,7 @@ install_packages \
     mesa-va-gallium
 
 # Install Wayland/Sway related packages
-install_packages \
+sudo apk add \
     wayland \
     xwayland \
     wl-clipboard \
@@ -68,7 +57,7 @@ install_packages \
     cmd:seatd-launch
 
 # Install Developer tools
-install_packages \
+sudo apk add \
     neovim \
     ripgrep \
     mprocs \
@@ -82,7 +71,7 @@ install_packages \
     docker-cli-compose
 
 # Install Applications
-install_packages \
+sudo apk add \
     firefox-developer-edition \
     ncspot \
     alacritty \
@@ -91,6 +80,13 @@ install_packages \
 
 # Install node packages
 yarn global add typescript typescript-language-server
+
+# Install rust
+rustup-init -y --profile minimal --default-toolchain nightly 
+source "$HOME/.alpine/dotfiles/.profile"
+
+# Install cargo binaries
+cargo install kickoff ncspot cargo-leptos --locked
 
 # Setup services
 echo amdgpu | sudo tee -a /etc/modules
@@ -102,9 +98,3 @@ sudo rc-update add seatd default
 
 # Add user to groups
 add_user_to_group input video seat
-
-# Setup rust
-rustup-init -y --default-toolchain nightly
-
-# Install cargo binaries
-cargo install kickoff --locked
