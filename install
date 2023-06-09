@@ -81,12 +81,12 @@ sudo apk add \
 # Install node packages
 yarn global add typescript typescript-language-server
 
-# Install rust
-rustup-init -y --profile minimal --default-toolchain nightly 
-source "$HOME/.alpine/dotfiles/.profile"
+# Install neovim
+git clone https://github.com/NvChad/NvChad.git ~/.config/nvim
 
-# Install cargo binaries
-cargo install kickoff ncspot cargo-leptos --locked
+# Install rust
+rustup-init -y --default-toolchain nightly 
+source "$HOME/.alpine/dotfiles/.profile"
 
 # Setup services
 echo amdgpu | sudo tee -a /etc/modules
@@ -98,3 +98,6 @@ sudo rc-update add seatd default
 
 # Add user to groups
 add_user_to_group input video seat
+
+# Install cargo binaries last
+cargo install kickoff ncspot cargo-leptos cargo-watch --locked

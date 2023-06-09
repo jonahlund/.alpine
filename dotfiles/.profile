@@ -19,8 +19,6 @@ ln -sf $DOT/sway ~/.config/sway
 rm -rf ~/.config/alacritty
 ln -sf $DOT/alacritty ~/.config/alacritty
 # Neovim
-rm -rf ~/.config/nvim
-git clone https://github.com/NvChad/NvChad.git --depth 1 ~/.config/nvim
 rm -rf ~/.config/nvim/lua/custom
 ln -sf $DOT/nvim/lua/custom ~/.config/nvim/lua/custom
 ln -sf $DOT/nvim/lua/.stylua.toml ~/.config/nvim/stylua.toml
