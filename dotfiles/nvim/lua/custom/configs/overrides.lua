@@ -34,10 +34,33 @@ M.mason = {
 	},
 }
 
+M.telescope = {
+	plugin = true,
+
+	i = {
+		--... your other mappings
+
+		["<C-j>"] = {
+			function()
+				require("telescope.actions").move_selection_next()
+			end,
+			"Move down",
+		},
+
+		["<C-k>"] = {
+			function()
+				require("telescope.actions").move_selection_previous()
+			end,
+			"Move up",
+		},
+	},
+}
+
 -- git support in nvimtree
 M.nvimtree = {
 	git = {
 		enable = true,
+		ignore = false,
 	},
 
 	renderer = {

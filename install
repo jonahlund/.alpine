@@ -26,7 +26,8 @@ sudo apk add \
     wget \
     tar \
     git \
-    fontconfig-dev
+    fontconfig-dev \
+    pciutils
 
 # Install XCB-related packages
 sudo apk add \
@@ -58,6 +59,7 @@ sudo apk add \
 
 # Install Developer tools
 sudo apk add \
+    cargo-make \
     neovim \
     ripgrep \
     mprocs \
@@ -72,7 +74,7 @@ sudo apk add \
 
 # Install Applications
 sudo apk add \
-    firefox-developer-edition \
+    firefox \
     ncspot \
     alacritty \
     tmux \

@@ -17,7 +17,8 @@ M.general = {
 		["<C-c>"] = { "<Esc>" },
 		["<C-d>"] = { "<C-d>zz" },
 		["<C-u>"] = { "<C-u>zz" },
-		["<leader>x"] = { "<cmd>!chmod +x %<CR>" },
+		["<leader>x"] = { "<cmd>!chmod +x %<CR>", opts = { silent = true } },
+		["<leader>lfm"] = { "<cmd>!leptosfmt %<CR>", opts = { silent = true } },
 	},
 	i = {
 		["<C-c>"] = { "<Esc>" },

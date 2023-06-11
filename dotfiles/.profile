@@ -34,14 +34,15 @@ ln -sf $DOT/.profile ~/.profile
 export TERM=alacritty
 export BROWSER=firefox
 
-export MOZ_ENABLE_WAYLAND=1
-export MOZ_DBUS_REMOTE=1
+GDK_BACKEND=x11
+MOZ_ENABLE_WAYLAND=0
 
 export XDG_CURRENT_DESKTOP=sway
 export QT_QPA_PLATFORM="wayland-egl"
 
-export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 export LIBVA_DRIVER_NAME=radeonsi
+export VDPAU_DRIVER=radeonsi
+export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 
 export RUSTFLAGS=-Ctarget-feature=-crt-static
 
