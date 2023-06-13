@@ -102,4 +102,5 @@ sudo rc-update add seatd default
 add_user_to_group input video seat
 
 # Install cargo binaries last
-cargo install kickoff ncspot cargo-leptos cargo-watch --locked
+cargo install binstall
+cargo binstall kickoff ncspot cargo-leptos cargo-watch --locked
