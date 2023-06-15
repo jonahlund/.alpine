@@ -59,6 +59,7 @@ sudo apk add \
 
 # Install Developer tools
 sudo apk add \
+    rust-analyzer \
     cargo-make \
     neovim \
     ripgrep \
@@ -80,14 +81,9 @@ sudo apk add \
     tmux \
     font-jetbrains-mono-nerd
 
-# Install node packages
-yarn global add typescript typescript-language-server
-
-# Install neovim
-git clone https://github.com/NvChad/NvChad.git ~/.config/nvim
-
 # Install rust
 rustup-init -y --default-toolchain nightly 
+source "$HOME/.cargo/env"
 source "$HOME/.alpine/dotfiles/.profile"
 
 # Setup services
@@ -102,5 +98,5 @@ sudo rc-update add seatd default
 add_user_to_group input video seat
 
 # Install cargo binaries last
-cargo install binstall
-cargo binstall kickoff ncspot cargo-leptos cargo-watch --locked
+cargo install cargo-binstall
+cargo binstall -y kickoff ncspot cargo-leptos cargo-watch --locked

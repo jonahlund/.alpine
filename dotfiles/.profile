@@ -19,9 +19,8 @@ ln -sf $DOT/sway ~/.config/sway
 rm -rf ~/.config/alacritty
 ln -sf $DOT/alacritty ~/.config/alacritty
 # Neovim
-rm -rf ~/.config/nvim/lua/custom
-ln -sf $DOT/nvim/lua/custom ~/.config/nvim/lua/custom
-ln -sf $DOT/nvim/lua/.stylua.toml ~/.config/nvim/stylua.toml
+rm -rf ~/.config/nvim
+ln -sf $DOT/nvim ~/.config/nvim
 # Ncspot
 rm -rf ~/.config/ncspot
 ln -sf $DOT/ncspot ~/.config/ncspot
@@ -34,8 +33,7 @@ ln -sf $DOT/.profile ~/.profile
 export TERM=alacritty
 export BROWSER=firefox
 
-GDK_BACKEND=x11
-MOZ_ENABLE_WAYLAND=0
+export MOZ_ENABLE_WAYLAND=1
 
 export XDG_CURRENT_DESKTOP=sway
 export QT_QPA_PLATFORM="wayland-egl"
