@@ -59,6 +59,7 @@ sudo apk add \
 
 # Install Developer tools
 sudo apk add \
+    redis \
     rust-analyzer \
     cargo-make \
     neovim \

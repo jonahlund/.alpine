@@ -45,3 +45,29 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- make current buffer executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- debugging
+vim.api.nvim_set_keymap(
+	"n",
+	"<F5>",
+	"<cmd>lua require'dap'.continue()<CR>",
+	{ noremap = true }
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<F10>",
+	"<cmd>lua require'dap'.step_over()<CR>",
+	{ noremap = true }
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<F11>",
+	"<cmd>lua require'dap'.step_into()<CR>",
+	{ noremap = true }
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<F12>",
+	"<cmd>lua require'dap'.toggle_breakpoint()<CR>",
+	{ noremap = true }
+)

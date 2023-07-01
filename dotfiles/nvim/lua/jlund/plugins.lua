@@ -1,5 +1,9 @@
+-- An array to hold the various plugins and their configurations.
 local plugins = {
+	-- plenary.nvim: A library of utility functions for Neovim plugins.
 	"nvim-lua/plenary.nvim",
+
+	-- nord: A color scheme based on the Nord theme.
 	{
 		"nordtheme/vim",
 		name = "nord",
@@ -9,24 +13,35 @@ local plugins = {
 			vim.cmd [[colorscheme nord]]
 		end,
 	},
+
+	-- nvim-lspconfig: Configuration utilities for the Neovim's built-in LSP client.
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			-- format & linting
 			{
-				"jose-elias-alvarez/null-ls.nvim",
+				"jose-elias-alvarez/null-ls.nvim", -- provides a way to use Neovim as a language server
 				config = function()
 					require "jlund.config.null-ls"
 				end,
 			},
+			"jayp0521/mason-null-ls.nvim",
 		},
 		config = function(_, opts)
 			require "jlund.config.lspconfig"
 		end,
 	},
+
+	-- nvim-treesitter: Provides syntax highlighting and other features based on Tree-sitter parsers.
 	{
 		"nvim-treesitter/nvim-treesitter",
+		cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
+		build = ":TSUpdate",
+		opts = function()
+			return require "jlund.config.treesitter"
+		end,
 	},
+
+	-- mason.nvim: A package manager for Neovim.
 	{
 		"williamboman/mason.nvim",
 		cmd = {
@@ -52,14 +67,24 @@ local plugins = {
 			vim.g.mason_binaries_list = opts.ensure_installed
 		end,
 	},
+
+	-- trouble.nvim: A pretty list for diagnostics and references.
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" }, -- dependency for web devicons
+	},
+
+	-- mason-lspconfig.nvim: Adds LSP support to mason.nvim.
 	{ "williamboman/mason-lspconfig.nvim" },
+
+	-- telescope.nvim: A highly customizable fuzzy finder for Neovim.
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 	},
 
+	-- indent-blankline.nvim: Adds vertical lines to indicate indentation levels.
 	{
-		-- indent-blankline (add vertical lines to show indent matches easily)
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
 			require("indent_blankline").setup()
@@ -67,15 +92,13 @@ local plugins = {
 		enabled = true,
 	},
 
-	-- load luasnips + cmp related in insert mode only
+	-- nvim-cmp: Autocomplete plugin.
 	{
 		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
 		dependencies = {
 			{
-				-- snippet plugin
-				"L3MON4D3/LuaSnip",
-				dependencies = "rafamadriz/friendly-snippets",
+				"L3MON4D3/LuaSnip", -- snippet support for nvim-cmp
+				dependencies = "rafamadriz/friendly-snippets", -- snippets collections
 				opts = {
 					history = true,
 					updateevents = "TextChanged,TextChangedI",
@@ -84,10 +107,8 @@ local plugins = {
 					require("jlund.config.luasnip").luasnip(opts)
 				end,
 			},
-
-			-- autopairing of (){}[] etc
 			{
-				"windwp/nvim-autopairs",
+				"windwp/nvim-autopairs", -- autopairing for brackets, parentheses, etc.
 				opts = {
 					fast_wrap = {},
 					disable_filetype = { "TelescopePrompt", "vim" },
@@ -104,23 +125,17 @@ local plugins = {
 					)
 				end,
 			},
-
-			-- cmp sources plugins
-			{
-				"saadparwaiz1/cmp_luasnip",
-				"hrsh7th/cmp-nvim-lua",
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-path",
-			},
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
 		},
 		opts = function()
 			return require "jlund.config.cmp"
 		end,
-		config = function(_, opts)
-			require("cmp").setup(opts)
-		end,
 	},
 }
 
+-- Setup lazy loading for the plugins
 require("lazy").setup(plugins)
