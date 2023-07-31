@@ -25,9 +25,11 @@ sudo apk add \
     curl \
     wget \
     tar \
+    bash \
     git \
     fontconfig-dev \
-    pciutils
+    pciutils \
+    adwaita-icon-theme
 
 # Install XCB-related packages
 sudo apk add \
@@ -72,7 +74,8 @@ sudo apk add \
     lua-language-server \
     stylua \
     docker \
-    docker-cli-compose
+    docker-cli-compose \
+    fd
 
 # Install Applications
 sudo apk add \
@@ -87,6 +90,9 @@ rustup-init -y --default-toolchain nightly
 source "$HOME/.cargo/env"
 source "$HOME/.alpine/dotfiles/.profile"
 
+# Install cargo binaries last
+cargo install kickoff ncspot cargo-leptos cargo-watch tmux-sessionizer --locked
+
 # Setup services
 echo amdgpu | sudo tee -a /etc/modules
 echo fbcon | sudo tee -a /etc/modules
@@ -97,7 +103,3 @@ sudo rc-update add seatd default
 
 # Add user to groups
 add_user_to_group input video seat
-
-# Install cargo binaries last
-cargo install cargo-binstall
-cargo binstall -y kickoff ncspot cargo-leptos cargo-watch --locked

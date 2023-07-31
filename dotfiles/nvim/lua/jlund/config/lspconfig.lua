@@ -6,7 +6,7 @@ local servers = {
 }
 
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup {
+	local config = {
 		on_attach = function(client, bufnr)
 			client.server_capabilities.documentFormattingProvider = false
 			client.server_capabilities.documentRangeFormattingProvider = false
@@ -46,4 +46,6 @@ for _, lsp in ipairs(servers) do
 		end,
 		capabilities = vim.lsp.protocol.make_client_capabilities(),
 	}
+
+	lspconfig[lsp].setup(config)
 end

@@ -12,6 +12,7 @@ if test -z "${XDG_RUNTIME_DIR}"; then
 fi
 
 # Link dotfiles
+mkdir -p ~/.config
 # Sway
 rm -rf ~/.config/sway
 ln -sf $DOT/sway ~/.config/sway
@@ -24,6 +25,9 @@ ln -sf $DOT/nvim ~/.config/nvim
 # Ncspot
 rm -rf ~/.config/ncspot
 ln -sf $DOT/ncspot ~/.config/ncspot
+# Tms
+rm -rf ~/.config/tms
+ln -sf $DOT/tms ~/.config/tms
 # Dotfiles
 ln -sf $DOT/.tmux.conf ~/.tmux.conf
 ln -sf $DOT/.gitconfig ~/.gitconfig

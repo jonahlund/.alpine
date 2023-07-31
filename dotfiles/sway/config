@@ -43,7 +43,6 @@ input type:keyboard {
 
 # Commands
 
-
 # Settings
 gaps outer 5
 gaps inner 10
@@ -131,6 +130,7 @@ client.background       $nord0
 
 # Bar colors
 bar {
+    font pango:DejaVu Sans Mono 10
     position top
     status_command ~/.config/sway/swaybar
     pango_markup yes
@@ -141,11 +141,20 @@ bar {
         separator $nord2
 
         focused_workspace  $nord3 $nord3 $nord6
-        active_workspace   $nord1 $nord3 $nord6
+        active_workspace   $nord1 $nord1 $nord6
         inactive_workspace $nord1 $nord1 $nord4
         urgent_workspace   $nord11 $nord12 $nord4
         binding_mode       $nord11 $nord12 $nord4
     }
 }
+
+# Idle inhibit for focused windows
+exec_always --no-startup-id swayidle \
+           timeout 300 'swaymsg "output * dpms off"' \
+              resume 'swaymsg "output * dpms on"' \
+           before-sleep 'swaylock -f -c 000000'
+
+for_window [class="^.*"] inhibit_idle fullscreen
+for_window [app_id="^.*"] inhibit_idle fullscreen
 
 include /etc/sway/config.d/*

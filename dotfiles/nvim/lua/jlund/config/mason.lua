@@ -2,16 +2,11 @@ local opts = {
 	ensure_installed = {
 		-- lua stuff
 		"lua-language-server",
-		"stylua",
 
 		-- web dev stuff
 		"prettier",
 		"css-lsp",
 		"html-lsp",
-
-		-- rust
-		"rust-analyzer",
-		"rustfmt",
 	}, -- not an option from mason.nvim
 	PATH = "skip",
 	ui = {

@@ -81,6 +81,9 @@ local plugins = {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
+		config = function()
+			require "jlund.config.telescope"
+		end,
 	},
 
 	-- indent-blankline.nvim: Adds vertical lines to indicate indentation levels.

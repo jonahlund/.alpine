@@ -10,6 +10,20 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "<Esc>", "<Esc><cmd>noh<CR>")
 
+-- tabs
+vim.api.nvim_set_keymap(
+	"n",
+	"<C-h>",
+	":tabnext<CR>",
+	{ noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"<C-l>",
+	":tabprevious<CR>",
+	{ noremap = true, silent = true }
+)
+
 -- esc
 vim.keymap.set("n", "<C-c>", "<Esc><cmd>noh<CR>")
 vim.keymap.set("i", "<C-c>", "<Esc>")
@@ -45,29 +59,3 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- make current buffer executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
--- debugging
-vim.api.nvim_set_keymap(
-	"n",
-	"<F5>",
-	"<cmd>lua require'dap'.continue()<CR>",
-	{ noremap = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<F10>",
-	"<cmd>lua require'dap'.step_over()<CR>",
-	{ noremap = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<F11>",
-	"<cmd>lua require'dap'.step_into()<CR>",
-	{ noremap = true }
-)
-vim.api.nvim_set_keymap(
-	"n",
-	"<F12>",
-	"<cmd>lua require'dap'.toggle_breakpoint()<CR>",
-	{ noremap = true }
-)
