@@ -6,100 +6,97 @@ set -e
 # Check if sudo is available
 command -v sudo > /dev/null 2>&1 || { echo >&2 "The script requires 'sudo' but it's not installed.  Aborting."; exit 1; }
 
-# Update and upgrade packages
-sudo apk update && sudo apk upgrade
-
 # Function to add a user to groups if not already added
 add_user_to_group() {
     for group in "$@"; do
-        sudo adduser $USER $group
+        if ! id -nG "$USER" | grep -qw "$group"; then
+            sudo adduser "$USER" "$group"
+        fi
     done
 }
 
-# Install Development Essentials
-sudo apk add \
-    build-base \
-    cmake \
-    openssl-dev \
-    python3 \
-    curl \
-    wget \
-    tar \
-    bash \
-    git \
-    fontconfig-dev \
-    pciutils \
-    adwaita-icon-theme
+# Function to install packages
+install_packages() {
+    for package in "$@"; do
+        if ! apk info -e "$package" > /dev/null 2>&1; then
+            sudo apk add "$package"
+        fi
+    done
+}
 
-# Install XCB-related packages
-sudo apk add \
-    xcb-util-dev \
-    xcb-util-renderutil-dev \
-    xcb-util-image-dev
+# Update and upgrade packages
+echo "Updating and upgrading packages..."
+sudo apk update && sudo apk upgrade
+
+# Install Development Essentials
+echo "Installing Development Essentials..."
+install_packages build-base cmake openssl-dev git fontconfig-dev
 
 # Install Audio/Video related packages
-sudo apk add \
-    pulseaudio \
-    linux-firmware-amdgpu \
-    mesa \
-    mesa-dri-gallium \
-    mesa-va-gallium
+echo "Installing Audio/Video related packages..."
+install_packages pulseaudio linux-firmware-amdgpu mesa mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
 
 # Install Wayland/Sway related packages
-sudo apk add \
-    wayland \
-    xwayland \
-    wl-clipboard \
-    sway \
-    swaylock \
-    swaybg \
-    swayidle \
-    udev \
-    dbus \
-    seatd \
-    cmd:seatd-launch
+echo "Installing Wayland/Sway related packages..."
+install_packages wayland xwayland wl-clipboard sway swaylock swaybg swayidle udev dbus seatd cmd:seatd-launch
 
 # Install Developer tools
-sudo apk add \
-    redis \
-    rust-analyzer \
-    cargo-make \
-    neovim \
-    ripgrep \
-    mprocs \
-    rustup \
-    nodejs \
-    yarn \
-    npm \
-    lua-language-server \
-    stylua \
-    docker \
-    docker-cli-compose \
-    fd
+echo "Installing Developer tools..."
+install_packages redis rust-analyzer neovim ripgrep rustup nodejs yarn sccache
 
 # Install Applications
-sudo apk add \
-    firefox \
-    ncspot \
-    alacritty \
-    tmux \
-    font-jetbrains-mono-nerd
+echo "Installing Applications..."
+install_packages firefox alacritty tmux font-jetbrains-mono-nerd
+
+# Install elogind
+echo "Installing elogind..."
+install_packages elogind
+sudo rc-update add elogind default
+sudo service elogind start
 
 # Install rust
+echo "Installing Rust..."
 rustup-init -y --default-toolchain nightly 
-source "$HOME/.cargo/env"
-source "$HOME/.alpine/dotfiles/.profile"
+. "$HOME/.cargo/env"
+. "$HOME/.alpine/dotfiles/.profile"
 
-# Install cargo binaries last
-cargo install kickoff ncspot cargo-leptos cargo-watch tmux-sessionizer --locked
+# Install cargo binaries
+echo "Installing Cargo binaries..."
+cargo install kickoff cargo-leptos cargo-watch tmux-sessionizer --locked
 
 # Setup services
+echo "Setting up services..."
 echo amdgpu | sudo tee -a /etc/modules
 echo fbcon | sudo tee -a /etc/modules
 sudo setup-devd udev
 echo $(sudo dbus-uuidgen) | sudo tee /var/lib/dbus/machine-id >/dev/null
 sudo rc-update add dbus
 sudo rc-update add seatd default
+sudo rc-service dbus start
 
 # Add user to groups
+echo "Adding user to groups..."
 add_user_to_group input video seat
+
+# Link dotfiles
+echo "Linking dotfiles..."
+mkdir -p ~/.config
+
+# Sway
+rm -rf ~/.config/sway
+ln -sf $DOT/sway ~/.config/sway
+
+# Alacritty
+rm -rf ~/.config/alacritty
+ln -sf $DOT/alacritty ~/.config/alacritty
+
+# Neovim
+rm -rf ~/.config/nvim
+ln -sf $DOT/nvim ~/.config/nvim
+
+# Dotfiles
+ln -sf $DOT/.tmux.conf ~/.tmux.conf
+ln -sf $DOT/.gitconfig ~/.gitconfig
+ln -sf $DOT/.profile ~/.profile
+
+echo "Installation completed!"
