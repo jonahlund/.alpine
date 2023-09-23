@@ -42,7 +42,7 @@ install_packages wayland xwayland wl-clipboard sway swaylock swaybg swayidle ude
 
 # Install Developer tools
 echo "Installing Developer tools..."
-install_packages redis rust-analyzer neovim ripgrep rustup nodejs yarn sccache
+install_packages redis neovim ripgrep rustup nodejs yarn sccache
 
 # Install Applications
 echo "Installing Applications..."
@@ -62,7 +62,7 @@ rustup-init -y --default-toolchain nightly
 
 # Install cargo binaries
 echo "Installing Cargo binaries..."
-cargo install kickoff cargo-leptos cargo-watch tmux-sessionizer --locked
+cargo install kickoff cargo-leptos cargo-watch
 
 # Setup services
 echo "Setting up services..."
