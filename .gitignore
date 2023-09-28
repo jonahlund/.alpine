@@ -1,1 +1,3 @@
 **/*.cbor
+# Ignore helix runtime
+**/helix/runtime

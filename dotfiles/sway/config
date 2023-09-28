@@ -52,6 +52,7 @@ for_window [class=".*"] border pixel 3
 focus_follows_mouse no
 
 # Key bindings
+bindsym $mod+p exec grimshot save area ~/screenshots/$(date +'%Y%m%d-%H%M%S').png
 bindsym $mod+Return exec $term
 bindsym $mod+q kill
 bindsym $mod+d exec $menu

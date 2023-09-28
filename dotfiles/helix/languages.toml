@@ -1,0 +1,7 @@
+[[language]]
+name = "astro"
+scope = "source.astro"
+file-types = ["astro"]
+auto-format = true
+language-server = { command = "astro-ls", args = ["--stdio"] }
+config = {typescript = {tsdk = "/usr/local/lib/node_modules/typescript/lib"}, environment = "node"}

@@ -1,0 +1,10 @@
+theme = "nord_new"
+
+[editor]
+line-number = "relative"
+idle-timeout = 250
+text-width = 80
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true

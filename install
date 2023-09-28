@@ -38,11 +38,11 @@ install_packages pulseaudio linux-firmware-amdgpu mesa mesa-dri-gallium mesa-va-
 
 # Install Wayland/Sway related packages
 echo "Installing Wayland/Sway related packages..."
-install_packages wayland xwayland wl-clipboard sway swaylock swaybg swayidle udev dbus seatd cmd:seatd-launch
+install_packages wayland xwayland wl-clipboard sway swaylock swaybg swayidle udev dbus seatd cmd:seatd-launch imv grim grimshot
 
 # Install Developer tools
 echo "Installing Developer tools..."
-install_packages redis neovim ripgrep rustup nodejs yarn sccache
+install_packages redis helix ripgrep rustup nodejs-current yarn sccache 
 
 # Install Applications
 echo "Installing Applications..."
@@ -62,7 +62,17 @@ rustup-init -y --default-toolchain nightly
 
 # Install cargo binaries
 echo "Installing Cargo binaries..."
-cargo install kickoff cargo-leptos cargo-watch
+rustup target add x86_64-unknown-linux-musl
+cargo install kickoff cargo-watch dotlink --target x86_64-unknown-linux-musl
+
+# Link dotfiles
+echo "Linking dotfiles..."
+mkdir -p ~/.config
+cd dotfiles && dotlink -p linux --file ../dotlink.toml
+
+# Install LSPs
+sudo npm i -g typescript typescript-language-server @astrojs/language-server vscode-langservers-extracted
+rustup component add rust-analyzer
 
 # Setup services
 echo "Setting up services..."
@@ -78,25 +88,8 @@ sudo rc-service dbus start
 echo "Adding user to groups..."
 add_user_to_group input video seat
 
-# Link dotfiles
-echo "Linking dotfiles..."
-mkdir -p ~/.config
-
-# Sway
-rm -rf ~/.config/sway
-ln -sf $DOT/sway ~/.config/sway
-
-# Alacritty
-rm -rf ~/.config/alacritty
-ln -sf $DOT/alacritty ~/.config/alacritty
-
-# Neovim
-rm -rf ~/.config/nvim
-ln -sf $DOT/nvim ~/.config/nvim
-
-# Dotfiles
-ln -sf $DOT/.tmux.conf ~/.tmux.conf
-ln -sf $DOT/.gitconfig ~/.gitconfig
-ln -sf $DOT/.profile ~/.profile
+# Setup helix
+hx --grammar fetch
+hx --grammar build
 
 echo "Installation completed!"

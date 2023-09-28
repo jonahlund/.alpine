@@ -2,8 +2,15 @@
 DIR=$HOME/.alpine
 DOT=$DIR/dotfiles
 
+if test -z "${XDG_RUNTIME_DIR}"; then
+	export XDG_RUNTIME_DIR=/tmp/$(id -u)-runtime-dir
+	if ! test -d "${XDG_RUNTIME_DIR}"; then
+		mkdir "${XDG_RUNTIME_DIR}"
+		chmod 0700 "${XDG_RUNTIME_DIR}"
+	fi
+fi
+
 export WLR_DRM_DEVICES=/dev/dri/card1
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
 export DBUS_SESSION_BUS_ADDRESS=unix:path=${XDG_RUNTIME_DIR}/bus
 
 export TERM=alacritty
@@ -19,7 +26,7 @@ export LIBVA_DRIVER_NAME=radeonsi
 export VDPAU_DRIVER=radeonsi
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 
-export RUSTFLAGS=-Ctarget-feature=-crt-static
+# export RUSTFLAGS=-Ctarget-feature=-crt-static
 export RUSTC_WRAPPER=sccache 
 
 . "$HOME/.cargo/env"
