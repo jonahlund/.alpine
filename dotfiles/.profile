@@ -11,7 +11,6 @@ if test -z "${XDG_RUNTIME_DIR}"; then
 fi
 
 export WLR_DRM_DEVICES=/dev/dri/card1
-export DBUS_SESSION_BUS_ADDRESS=unix:path=${XDG_RUNTIME_DIR}/bus
 
 export TERM=alacritty
 export BROWSER=firefox
@@ -25,8 +24,11 @@ export QT_QPA_PLATFORM=xcb
 export LIBVA_DRIVER_NAME=radeonsi
 export VDPAU_DRIVER=radeonsi
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
+export $(dbus-launch)
+export LD_PRELOAD=""
 
-# export RUSTFLAGS=-Ctarget-feature=-crt-static
+export RUSTFLAGS=-Ctarget-feature=-crt-static
 export RUSTC_WRAPPER=sccache 
 
 . "$HOME/.cargo/env"
+export PATH="$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/:$PATH"

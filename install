@@ -15,42 +15,33 @@ add_user_to_group() {
     done
 }
 
-# Function to install packages
-install_packages() {
-    for package in "$@"; do
-        if ! apk info -e "$package" > /dev/null 2>&1; then
-            sudo apk add "$package"
-        fi
-    done
-}
-
 # Update and upgrade packages
 echo "Updating and upgrading packages..."
 sudo apk update && sudo apk upgrade
 
 # Install Development Essentials
 echo "Installing Development Essentials..."
-install_packages build-base cmake openssl-dev git fontconfig-dev
+sudo apk add build-base cmake openssl-dev git fontconfig-dev
 
 # Install Audio/Video related packages
 echo "Installing Audio/Video related packages..."
-install_packages pulseaudio linux-firmware-amdgpu mesa mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
+sudo apk add pulseaudio linux-firmware-amdgpu mesa mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
 
 # Install Wayland/Sway related packages
 echo "Installing Wayland/Sway related packages..."
-install_packages wayland xwayland wl-clipboard sway swaylock swaybg swayidle udev dbus seatd cmd:seatd-launch imv grim grimshot
+sudo apk add wayland xwayland wl-clipboard sway swaylock swaybg swayidle udev dbus seatd cmd:seatd-launch imv grim grimshot
 
 # Install Developer tools
 echo "Installing Developer tools..."
-install_packages redis helix ripgrep rustup nodejs-current yarn sccache 
+sudo apk add redis helix ripgrep rustup nodejs-current npm yarn sccache 
 
 # Install Applications
 echo "Installing Applications..."
-install_packages firefox alacritty tmux font-jetbrains-mono-nerd
+sudo apk add firefox alacritty tmux font-jetbrains-mono-nerd
 
 # Install elogind
 echo "Installing elogind..."
-install_packages elogind
+sudo apk add elogind
 sudo rc-update add elogind default
 sudo service elogind start
 
@@ -68,10 +59,11 @@ cargo install kickoff cargo-watch dotlink --target x86_64-unknown-linux-musl
 # Link dotfiles
 echo "Linking dotfiles..."
 mkdir -p ~/.config
+rm -rf ~/.profile
 cd dotfiles && dotlink -p linux --file ../dotlink.toml
 
 # Install LSPs
-sudo npm i -g typescript typescript-language-server @astrojs/language-server vscode-langservers-extracted
+sudo npm i -g typescript typescript-language-server @astrojs/language-server vscode-langservers-extracted prettier
 rustup component add rust-analyzer
 
 # Setup services

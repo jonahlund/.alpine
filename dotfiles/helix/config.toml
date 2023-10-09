@@ -8,3 +8,9 @@ text-width = 80
 [editor.lsp]
 display-messages = true
 display-inlay-hints = true
+auto-signature-help = true
+
+[editor.indent-guides]
+render = true
+character = "▏" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
