@@ -1,5 +1,5 @@
 [[linux]]
-names = [ 'alacritty', 'helix', 'sway' ]
+names = [ 'alacritty', 'helix', 'sway', 'joshuto' ]
 to = '~/.config'
 
 [[linux]]

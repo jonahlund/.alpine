@@ -21,7 +21,7 @@ sudo apk update && sudo apk upgrade
 
 # Install Development Essentials
 echo "Installing Development Essentials..."
-sudo apk add build-base cmake openssl-dev git fontconfig-dev
+sudo apk add build-base cmake openssl-dev git fontconfig-dev polkit
 
 # Install Audio/Video related packages
 echo "Installing Audio/Video related packages..."
@@ -29,7 +29,7 @@ sudo apk add pulseaudio linux-firmware-amdgpu mesa mesa-dri-gallium mesa-va-gall
 
 # Install Wayland/Sway related packages
 echo "Installing Wayland/Sway related packages..."
-sudo apk add wayland xwayland wl-clipboard sway swaylock swaybg swayidle udev dbus seatd cmd:seatd-launch imv grim grimshot
+sudo apk add wayland xwayland wl-clipboard sway swaylock swaybg swayidle udev dbus seatd cmd:seatd-launch imv grim grimshot dbus-openrc dbus-libs dbus-daemon-launch-helper
 
 # Install Developer tools
 echo "Installing Developer tools..."

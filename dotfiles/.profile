@@ -24,7 +24,6 @@ export QT_QPA_PLATFORM=xcb
 export LIBVA_DRIVER_NAME=radeonsi
 export VDPAU_DRIVER=radeonsi
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
-export $(dbus-launch)
 export LD_PRELOAD=""
 
 export RUSTFLAGS=-Ctarget-feature=-crt-static
