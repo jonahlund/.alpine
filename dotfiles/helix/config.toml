@@ -1,8 +1,7 @@
-theme = "nord_new"
+theme = "nord"
 
 [editor]
 line-number = "relative"
-idle-timeout = 250
 text-width = 80
 
 [editor.lsp]
@@ -14,6 +13,3 @@ auto-signature-help = true
 render = true
 character = "▏" # Some characters that work well: "▏", "┆", "┊", "⸽"
 skip-levels = 1
-
-[keys.normal.space]
-"e" = ":wq"
