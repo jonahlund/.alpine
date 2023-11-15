@@ -28,6 +28,10 @@ export LD_PRELOAD=""
 
 export RUSTFLAGS=-Ctarget-feature=-crt-static
 export RUSTC_WRAPPER=sccache 
+export HELIX_RUNTIME=/usr/share/helix/runtime
 
 . "$HOME/.cargo/env"
 export PATH="$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/:$PATH"
+
+# Created by `pipx` on 2023-11-10 05:20:53
+export PATH="$PATH:/home/jlund/.local/bin"
