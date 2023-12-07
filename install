@@ -21,7 +21,7 @@ sudo apk update && sudo apk upgrade
 
 # Install Development Essentials
 echo "Installing Development Essentials..."
-sudo apk add build-base cmake openssl-dev git fontconfig-dev polkit
+sudo apk add build-base cmake openssl-dev git fontconfig-dev polkit libxkbcommon-dev
 
 # Install Audio/Video related packages
 echo "Installing Audio/Video related packages..."
@@ -29,7 +29,7 @@ sudo apk add pulseaudio linux-firmware-amdgpu mesa mesa-dri-gallium mesa-va-gall
 
 # Install Wayland/Sway related packages
 echo "Installing Wayland/Sway related packages..."
-sudo apk add wayland xwayland wl-clipboard sway swaylock swaybg swayidle udev dbus seatd cmd:seatd-launch imv grim grimshot dbus-openrc dbus-libs dbus-daemon-launch-helper
+sudo apk add wayland xwayland wl-clipboard sway swaylock swaybg swayidle udev dbus cmd:dbus-launch dbus-openrc dbus-libs dbus-daemon-launch-helper
 
 # Install Developer tools
 echo "Installing Developer tools..."
@@ -54,7 +54,7 @@ rustup-init -y --default-toolchain nightly
 # Install cargo binaries
 echo "Installing Cargo binaries..."
 rustup target add x86_64-unknown-linux-musl
-cargo install kickoff cargo-watch dotlink --target x86_64-unknown-linux-musl
+cargo install kickoff cargo-watch dotlink --target x86_64-unknown-linux-musl --locked
 
 # Link dotfiles
 echo "Linking dotfiles..."
@@ -73,7 +73,6 @@ echo fbcon | sudo tee -a /etc/modules
 sudo setup-devd udev
 echo $(sudo dbus-uuidgen) | sudo tee /var/lib/dbus/machine-id >/dev/null
 sudo rc-update add dbus
-sudo rc-update add seatd default
 sudo rc-service dbus start
 
 # Add user to groups

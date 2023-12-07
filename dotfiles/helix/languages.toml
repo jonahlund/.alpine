@@ -1,3 +1,6 @@
+[language-server.rust-analyzer.config.rustfmt]
+overrideCommand = ["leptosfmt", "--stdin", "--rustfmt"]
+
 [language-server.astro-ls]
 command = "astro-ls"
 args = ["--stdio"]
@@ -6,4 +9,18 @@ config = { typescript = { tsdk = "/usr/local/lib/node_modules/typescript/lib" },
 [[language]]
 name = "astro"
 auto-format = true
-language-servers = [ "astro-ls" ]
+language-servers = ["astro-ls"]
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "hcl"
+auto-format = true
+language-servers = ["terraform-ls"]
+
+[language-server.yaml-language-server.config.yaml]
+format = { enable = true }
+validation = true

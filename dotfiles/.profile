@@ -1,7 +1,3 @@
-# Base directory for the script
-DIR=$HOME/.alpine
-DOT=$DIR/dotfiles
-
 if test -z "${XDG_RUNTIME_DIR}"; then
 	export XDG_RUNTIME_DIR=/tmp/$(id -u)-runtime-dir
 	if ! test -d "${XDG_RUNTIME_DIR}"; then
@@ -26,12 +22,12 @@ export VDPAU_DRIVER=radeonsi
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 export LD_PRELOAD=""
 
-export RUSTFLAGS=-Ctarget-feature=-crt-static
+# export RUSTFLAGS=-Ctarget-feature=-crt-static
 export RUSTC_WRAPPER=sccache 
 export HELIX_RUNTIME=/usr/share/helix/runtime
 
-. "$HOME/.cargo/env"
 export PATH="$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/:$PATH"
+. "$HOME/.cargo/env"
 
-# Created by `pipx` on 2023-11-10 05:20:53
-export PATH="$PATH:/home/jlund/.local/bin"
+alias sway='exec dbus-launch --exit-with-session sway'
+alias steam='flatpak run --user com.valvesoftware.Steam'
