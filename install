@@ -29,7 +29,7 @@ sudo apk add pulseaudio linux-firmware-amdgpu mesa mesa-dri-gallium mesa-va-gall
 
 # Install Wayland/Sway related packages
 echo "Installing Wayland/Sway related packages..."
-sudo apk add wayland xwayland wl-clipboard sway swaylock swaybg swayidle udev dbus cmd:dbus-launch dbus-openrc dbus-libs dbus-daemon-launch-helper
+sudo apk add wayland xwayland wl-clipboard sway swaylock swaybg swayidle udev dbus cmd:dbus-launch dbus-openrc dbus-libs dbus-daemon-launch-helper seatd cmd:seatd-launch
 
 # Install Developer tools
 echo "Installing Developer tools..."
@@ -73,7 +73,9 @@ echo fbcon | sudo tee -a /etc/modules
 sudo setup-devd udev
 echo $(sudo dbus-uuidgen) | sudo tee /var/lib/dbus/machine-id >/dev/null
 sudo rc-update add dbus
+sudo rc-update add seatd default
 sudo rc-service dbus start
+sudo rc-service seatd start
 
 # Add user to groups
 echo "Adding user to groups..."

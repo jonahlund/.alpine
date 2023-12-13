@@ -22,11 +22,10 @@ export VDPAU_DRIVER=radeonsi
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 export LD_PRELOAD=""
 
-# export RUSTFLAGS=-Ctarget-feature=-crt-static
 export RUSTC_WRAPPER=sccache 
 export HELIX_RUNTIME=/usr/share/helix/runtime
 
-export PATH="$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 . "$HOME/.cargo/env"
 
 alias sway='exec dbus-launch --exit-with-session sway'
