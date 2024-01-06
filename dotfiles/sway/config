@@ -52,7 +52,7 @@ for_window [class=".*"] border pixel 3
 focus_follows_mouse no
 
 # Key bindings
-bindsym $mod+p exec grimshot save area ~/screenshots/$(date +'%Y%m%d-%H%M%S').png
+bindsym $mod+p exec grimshot save area ~/Screenshots/$(date +'%Y%m%d-%H%M%S').png
 bindsym $mod+Return exec $term
 bindsym $mod+q kill
 bindsym $mod+d exec $menu
@@ -131,7 +131,6 @@ client.background       $nord0
 
 # Bar colors
 bar {
-    font pango:DejaVu Sans Mono 10
     position top
     status_command ~/.config/sway/swaybar
     pango_markup yes
@@ -156,7 +155,9 @@ exec_always --no-startup-id swayidle \
            before-sleep 'swaylock -f -c 000000'
 
 # Dbus
-exec_always dbus-daemon --nofork --address unix:path=$XDG_RUNTIME_DIR/bus --session
+exec dbus-daemon --nofork --address unix:path=$XDG_RUNTIME_DIR/bus --session
+exec /usr/libexec/pipewire-launcher
+exec dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 for_window [class="^.*"] inhibit_idle fullscreen
 for_window [app_id="^.*"] inhibit_idle fullscreen

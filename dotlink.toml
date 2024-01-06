@@ -1,12 +1,12 @@
 [[linux]]
-names = [ 'alacritty', 'helix', 'sway' ]
+names = ['alacritty', 'helix', 'sway', 'gtk-3.0', 'fontconfig']
 to = '~/.config'
 
 [[linux]]
-names = [ '.gitconfig', '.profile', '.tmux.conf' ]
+names = ['.gitconfig', '.profile', '.tmux.conf']
 to = '~/'
 
 [[linux]]
-names = [ 'cargo.toml' ]
+names = ['cargo.toml']
 to = '~/.cargo'
 rename = 'config.toml'
