@@ -21,7 +21,7 @@ sudo apk add build-base cmake git fontconfig-dev polkit libxkbcommon-dev libxkbf
 
 # Install Audio/Video related packages
 echo "Installing Audio/Video related packages..."
-sudo apk add pipewire pipewire-pulse linux-firmware-amdgpu mesa mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
+sudo apk add wireplumber pipewire pipewire-pulse linux-firmware-amdgpu mesa mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
 
 # Install Wayland/Sway related packages
 echo "Installing Wayland/Sway related packages..."
@@ -29,7 +29,7 @@ sudo apk add wayland xwayland wl-clipboard sway swaylock swaybg swayidle
 
 # Install DBUS/Seatd
 echo "Insalling DBUS/seatd packages..."
-sudo apk add udev dbus cmd:dbus-launch dbus-openrc dbus-libs dbus-daemon-launch-helper seatd cmd:seatd-launch pipewire wireplumber pipewire-pulse
+sudo apk add udev dbus cmd:dbus-launch dbus-openrc dbus-libs dbus-daemon-launch-helper seatd cmd:seatd-launch
 
 # Install Developer tools
 echo "Installing Developer tools..."
@@ -37,7 +37,7 @@ sudo apk add helix ripgrep rustup nodejs-current yarn sccache taplo
 
 # Install Applications
 echo "Installing Applications..."
-sudo apk add firefox alacritty tmux grim grimshot mpv imv
+sudo apk add firefox alacritty tmux grim grimshot mpv imv obs-studio
 
 # Install Fonts
 echo "Installing Fonts..."
@@ -54,9 +54,9 @@ echo "Installing Cargo binaries..."
 cargo install kickoff dotlink --locked
 
 # Create directories
-mkdir ~/Screenshots
-mkdir ~/Code
-mkdir ~/Recordings
+mkdir -p ~/Screenshots
+mkdir -p ~/Code
+mkdir -p ~/Recordings
 
 # Link dotfiles
 echo "Linking dotfiles..."
@@ -65,7 +65,6 @@ rm -rf ~/.profile
 cd dotfiles && dotlink -p linux --file ../dotlink.toml
 
 # Install LSPs
-sudo npm i -g typescript typescript-language-server vscode-langservers-extracted prettier
 rustup component add rust-analyzer
 
 # Setup services

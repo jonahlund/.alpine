@@ -156,6 +156,7 @@ exec_always --no-startup-id swayidle \
 
 # Dbus
 exec dbus-daemon --nofork --address unix:path=$XDG_RUNTIME_DIR/bus --session
+exec export $(dbus-launch)
 exec /usr/libexec/pipewire-launcher
 exec dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
