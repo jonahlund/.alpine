@@ -5,8 +5,3 @@ to = '~/.config'
 [[linux]]
 names = ['.gitconfig', '.profile', '.tmux.conf']
 to = '~/'
-
-[[linux]]
-names = ['cargo.toml']
-to = '~/.cargo'
-rename = 'config.toml'

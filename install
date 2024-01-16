@@ -68,8 +68,7 @@ rm -rf ~/.profile
 cd dotfiles && dotlink -p linux --file ../dotlink.toml
 
 # Install LSPs
-sudo apk add biome
-sudo npm i -g typescript-language-server
+sudo npm i -g typescript-language-server biome typescript
 rustup component add rust-analyzer
 
 # Setup services
@@ -84,9 +83,5 @@ sudo rc-update add seatd default
 # Add user to groups
 echo "Adding user to groups..."
 add_user_to_group input video seat
-
-# Setup helix
-hx --grammar fetch
-hx --grammar build
 
 echo "Installation completed!"
