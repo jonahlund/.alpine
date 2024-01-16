@@ -30,3 +30,6 @@ export RUSTC_WRAPPER=sccache
 export HELIX_RUNTIME=/usr/share/helix/runtime
 
 . "$HOME/.cargo/env"
+
+# Created by `pipx` on 2024-01-11 14:57:37
+export PATH="$PATH:/home/jlund/.local/bin"

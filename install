@@ -23,6 +23,11 @@ sudo apk add build-base cmake git fontconfig-dev polkit libxkbcommon-dev libxkbf
 echo "Installing Audio/Video related packages..."
 sudo apk add wireplumber pipewire pipewire-pulse linux-firmware-amdgpu mesa mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
 
+# Install xdg packages
+echo "Installing XDG packages..."
+sudo apk add xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr
+xdg-user-dirs-update
+
 # Install Wayland/Sway related packages
 echo "Installing Wayland/Sway related packages..."
 sudo apk add wayland xwayland wl-clipboard sway swaylock swaybg swayidle
@@ -33,7 +38,7 @@ sudo apk add udev dbus cmd:dbus-launch dbus-openrc dbus-libs dbus-daemon-launch-
 
 # Install Developer tools
 echo "Installing Developer tools..."
-sudo apk add helix ripgrep rustup nodejs-current yarn sccache taplo
+sudo apk add helix ripgrep rustup nodejs-current yarn sccache taplo npm
 
 # Install Applications
 echo "Installing Applications..."
@@ -45,7 +50,7 @@ sudo apk add font-jetbrains-mono-nerd font-ipa font-noto
 
 # Install rust
 echo "Installing Rust..."
-rustup-init -y --default-toolchain stable
+rustup-init -y --default-toolchain nightly
 . "$HOME/.cargo/env"
 . "$HOME/.alpine/dotfiles/.profile"
 
@@ -54,9 +59,7 @@ echo "Installing Cargo binaries..."
 cargo install kickoff dotlink --locked
 
 # Create directories
-mkdir -p ~/Screenshots
 mkdir -p ~/Code
-mkdir -p ~/Recordings
 
 # Link dotfiles
 echo "Linking dotfiles..."
@@ -65,6 +68,8 @@ rm -rf ~/.profile
 cd dotfiles && dotlink -p linux --file ../dotlink.toml
 
 # Install LSPs
+sudo apk add biome
+sudo npm i -g typescript-language-server
 rustup component add rust-analyzer
 
 # Setup services
