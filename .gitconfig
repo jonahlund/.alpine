@@ -2,7 +2,7 @@
 	defaultBranch = main
 [user]
 	name = Jonah Lund
-	email = jlunddev.64@proton.me
+	email = jonahlund@proton.me
 	signingkey = /home/jlund/.ssh/id_ed25519.pub
 [gpg]
 	format = ssh

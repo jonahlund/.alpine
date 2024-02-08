@@ -1,7 +1,15 @@
-[[linux]]
-names = ['alacritty', 'helix', 'sway', 'gtk-3.0', 'fontconfig']
+[[user]]
+names = ['alacritty', 'helix', 'sway', 'gtk-3.0', 'fontconfig', 'fcitx5']
 to = '~/.config'
 
-[[linux]]
+[[user]]
 names = ['.gitconfig', '.profile', '.tmux.conf']
 to = '~/'
+
+[[system]]
+names = ['bin/sway-run']
+to = '/usr/local'
+
+[[system]]
+names = ['greetd']
+to = '/etc'

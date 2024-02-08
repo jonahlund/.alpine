@@ -1,13 +1,13 @@
-# [language-server.rust-analyzer.config.rustfmt]
-# overrideCommand = ["leptosfmt", "--stdin", "--rustfmt"]
+[language-server]
+biome = { command = "biome", args = ["lsp-proxy"] }
+
+[language-server.rust-analyzer.config.check]
+command = "clippy"
 
 [[language]]
 name = "toml"
 formatter = { command = "taplo", args = ["fmt", "-"] }
 auto-format = true
-
-[language-server]
-biome = { command = "biome", args = ["lsp-proxy"] }
 
 [[language]]
 name = "javascript"
@@ -57,25 +57,3 @@ language-servers = [
   ] },
   "biome",
 ]
-
-[language-server.sql-language-server]
-command = "sql-language-server"
-args = ["up", "--method", "stdio"]
-
-[[language]]
-name = "sql"
-language-servers = ["sql-language-server"]
-
-[[language]]
-name = "hcl"
-auto-format = true
-language-servers = ["terraform-ls"]
-
-[[language]]
-name = "html"
-auto-format = true
-formatter = { command = "prettier", args = ["--parser", "html"] }
-
-[language-server.yaml-language-server.config.yaml]
-format = { enable = true }
-validation = true
