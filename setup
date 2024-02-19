@@ -1,10 +1,12 @@
 #!/bin/sh
 
-sudo setup-devd
+set -e
+
+sudo setup-devd udev
 
 # Install development essentials
 echo "Installing development essentials..."
-sudo apk add build-base cmake libxkbcommon-dev libxkbfile-dev libressl-dev
+sudo apk add build-base cmake libxkbcommon-dev libxkbfile-dev libressl-dev fontconfig-dev
 
 # Install firmware
 echo "Installing firmware"
@@ -40,7 +42,7 @@ ln -sf $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/rust-analy
 
 # Install cargo binaries
 echo "Installing cargo binaries..."
-cargo install kickoff dotlink --locked
+cargo install kickoff dotlink
 
 # Install node/yarn
 echo "Installing node/yarn..."
@@ -54,7 +56,7 @@ yarn global add \
 
 # Install fonts
 echo "Installing fonts..."
-sudo apk add fontconfig-dev font-jetbrains-mono-nerd font-ipa font-noto
+sudo apk add font-jetbrains-mono-nerd font-ipa font-noto
 fc-cache -fv
 
 # Install languages
@@ -97,7 +99,7 @@ sudo rc-update add polkit default
 # greetd acts as a system service that manages user sessions and provides a way for users
 # to log into their system or start new sessions.
 echo "Installing greetd..."
-sudo apk add greetd greetd-wlgreet
+sudo apk add greetd greetd-wlgreet greetd-openrc
 sudo rc-update add greetd default
 # Remove default greetd configuration
 sudo rm -rf /etc/greetd
