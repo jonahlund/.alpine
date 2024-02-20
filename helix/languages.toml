@@ -1,3 +1,5 @@
+## -- Language Server Config --
+
 [language-server]
 biome = { command = "biome", args = ["lsp-proxy"] }
 
@@ -7,6 +9,14 @@ command = "clippy"
 [language-server.sql-language-server]
 command = "sql-language-server"
 args = ["up", "--method", "stdio"]
+
+## -- Grammars --
+
+[[grammar]]
+name = "embedded-template"
+source = { git = "https://github.com/JonahLund/tree-sitter-embedded-template", branch = "sailfish", rev = "1fec69aacc09e0cea588314ca2a20dc2f01e33ac" }
+
+## -- Languages--
 
 [[language]]
 name = "sql"

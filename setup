@@ -39,6 +39,7 @@ rustup-init -y --default-toolchain nightly
 rustup component add rust-analyzer
 ln -sf $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/rust-analyzer \
   $HOME/.cargo/bin/rust-analyzer
+source $HOME/.alpine/.profile
 
 # Install cargo binaries
 echo "Installing cargo binaries..."

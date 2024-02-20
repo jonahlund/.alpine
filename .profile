@@ -12,6 +12,15 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
+# Session
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=sway
+export XDG_CURRENT_DESKTOP=sway
+
+# Wayland stuff
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland
+
 export PATH="$HOME/.yarn/bin:$PATH"
 
 . "$HOME/.cargo/env"
