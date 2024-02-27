@@ -4,9 +4,12 @@ set -e
 
 sudo setup-devd udev
 
+# Source the profile to have the correct environment variables set during installation
+source $HOME/.alpine/.profile
+
 # Install development essentials
 echo "Installing development essentials..."
-sudo apk add build-base cmake libxkbcommon-dev libxkbfile-dev libressl-dev fontconfig-dev
+sudo apk add build-base cmake libressl-dev fontconfig-dev
 
 # Install firmware
 echo "Installing firmware"
@@ -35,11 +38,10 @@ sudo apk add sway swaylock swaybg swayidle
 echo "Installing rust..."
 sudo apk add rustup sccache
 rustup-init -y --default-toolchain nightly
-. "$HOME/.cargo/env"
+source "$HOME/.cargo/env"
 rustup component add rust-analyzer
 ln -sf $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/rust-analyzer \
   $HOME/.cargo/bin/rust-analyzer
-source $HOME/.alpine/.profile
 
 # Install cargo binaries
 echo "Installing cargo binaries..."
@@ -100,7 +102,7 @@ sudo rc-update add polkit default
 # greetd acts as a system service that manages user sessions and provides a way for users
 # to log into their system or start new sessions.
 echo "Installing greetd..."
-sudo apk add greetd greetd-wlgreet greetd-openrc
+sudo apk add greetd greetd-openrc
 sudo rc-update add greetd default
 # Remove default greetd configuration
 sudo rm -rf /etc/greetd
