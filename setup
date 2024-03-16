@@ -9,7 +9,7 @@ source $HOME/.alpine/.profile
 
 # Install development essentials
 echo "Installing development essentials..."
-sudo apk add build-base cmake libressl-dev fontconfig-dev
+sudo apk add build-base cmake libressl-dev fontconfig-dev perl
 
 # Install firmware
 echo "Installing firmware"
@@ -19,7 +19,7 @@ echo fbcon | sudo tee -a /etc/modules
 
 # Install pipewire
 echo "Installing pipewire..."
-sudo apk add wireplumber pipewire pipewire-pulse
+sudo apk add wireplumber pipewire pipewire-pulse pipewire-spa-vulkan
 
 # Install xdg
 echo "Installing xdg..."
