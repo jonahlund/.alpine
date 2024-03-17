@@ -102,7 +102,7 @@ sudo rc-update add polkit default
 # greetd acts as a system service that manages user sessions and provides a way for users
 # to log into their system or start new sessions.
 echo "Installing greetd..."
-sudo apk add greetd greetd-openrc
+sudo apk add greetd greetd-openrc greetd-agreety
 sudo rc-update add greetd default
 # Remove default greetd configuration
 sudo rm -rf /etc/greetd
