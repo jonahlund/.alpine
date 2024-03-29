@@ -9,7 +9,7 @@ source $HOME/.alpine/.profile
 
 # Install development essentials
 echo "Installing development essentials..."
-sudo apk add build-base cmake libressl-dev fontconfig-dev perl
+sudo apk add build-base cmake libressl-dev fontconfig-dev perl libxkbcommon-dev libxkbfile-dev
 
 # Install firmware
 echo "Installing firmware"
