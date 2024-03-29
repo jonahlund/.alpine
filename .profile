@@ -22,4 +22,7 @@ export MOZ_ENABLE_WAYLAND=1
 export QT_QPA_PLATFORM=wayland
 
 export PATH="$HOME/.yarn/bin:$PATH"
-. "$HOME/.cargo/env"
+
+if [ -f "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
