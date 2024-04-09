@@ -9,7 +9,7 @@ source $HOME/.alpine/.profile
 
 # Install development essentials
 echo "Installing development essentials..."
-sudo apk add build-base cmake libressl-dev fontconfig-dev perl libxkbcommon-dev libxkbfile-dev
+sudo apk add build-base cmake libressl-dev fontconfig-dev perl
 
 # Install firmware
 echo "Installing firmware"
@@ -45,7 +45,7 @@ ln -sf $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/rust-analy
 
 # Install cargo binaries
 echo "Installing cargo binaries..."
-cargo install kickoff dotlink
+cargo install dotlink
 
 # Install node/yarn
 echo "Installing node/yarn..."
