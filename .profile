@@ -14,7 +14,7 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
-export XDG_SESSION_TYPE=wayland_egl
+export XDG_SESSION_TYPE=wayland-egl
 export XDG_SESSION_DESKTOP=sway
 export XDG_CURRENT_DESKTOP=sway
 
