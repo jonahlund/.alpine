@@ -20,10 +20,13 @@ export XDG_SESSION_DESKTOP=sway
 export XDG_CURRENT_DESKTOP=sway
 
 export MOZ_ENABLE_WAYLAND=1
-export QT_QPA_PLATFORM=wayland-egl
+export QT_QPA_PLATFORM=wayland
 
 export PATH="$HOME/.yarn/bin:$PATH"
 
 if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
+
+# Created by `pipx` on 2024-05-14 21:12:34
+export PATH="$PATH:/home/jlund/.local/bin"

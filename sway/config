@@ -4,7 +4,7 @@ exec /usr/libexec/pipewire-launcher
 exec /usr/libexec/xdg-desktop-portal-wlr
 
 ### Autostart
-exec fcitx5 &
+# exec fcitx5 &
 
 ### Variables
 set $mod Mod4
@@ -198,6 +198,7 @@ mode "resize" {
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "resize"
 
