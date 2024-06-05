@@ -28,5 +28,4 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
-# Created by `pipx` on 2024-05-14 21:12:34
-export PATH="$PATH:/home/jlund/.local/bin"
+export HELIX_RUNTIME=/usr/lib/helix
