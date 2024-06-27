@@ -1,0 +1,124 @@
+#!/bin/sh
+
+set -e
+sudo setup-devd udev
+
+# Source the profile to have the correct environment variables set during installation
+. $HOME/.alpine/dotfiles/.profile
+
+### Install base packages
+echo "Installing base packages..."
+sudo apk add build-base openssl-dev fontconfig-dev bash curl wget
+
+### Install and configure graphic drivers
+#
+# This is configured for AMD chipsets
+#
+# For Intel: https://wiki.alpinelinux.org/wiki/Intel_Video
+# For AMD/Radeon: https://wiki.alpinelinux.org/wiki/Radeon_Video
+# For NVIDIA: https://wiki.alpinelinux.org/wiki/NVIDIA
+echo "Installing graphics..."
+sudo apk add linux-firmware-amdgpu mesa-dev mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
+# Add the kernel modules to load during boot
+# Edit these to your chipset
+echo amdgpu | sudo tee -a /etc/modules
+echo fbcon | sudo tee -a /etc/modules
+
+### Install pipewire
+echo "Installing pipewire..."
+sudo apk add pipewire pipewire-tools pipewire-spa-tools pipewire-pulse pipewire-spa-vulkan
+sudo apk add wireplumber wireplumber-logind
+
+### Install xdg
+echo "Installing xdg..."
+sudo apk add xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr
+xdg-user-dirs-update
+
+### Install wayland
+echo "Installing wayland..."
+sudo apk add wlroots wayland xwayland wl-clipboard
+
+### Install sway
+echo "Installing sway..."
+sudo apk add sway swaylock swaybg swayidle
+
+### Install rust
+echo "Installing rust..."
+sudo apk add rustup sccache
+rustup-init -y --default-toolchain nightly
+. "$HOME/.cargo/env"
+rustup component add rust-analyzer
+
+### Install fonts
+echo "Installing fonts..."
+sudo apk add font-jetbrains-mono-nerd
+fc-cache -fv
+
+### Install mandoc and respective documentations
+echo "Installing docs..."
+sudo apk add mandoc man-pages cmus-doc pipewire-doc elogind-doc
+
+### Install cargo-binstall
+echo "Installing cargo-binstall..."
+curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+
+### Install cargo binaries
+#
+# Add your favorite rust binaries here
+echo "Installing cargo binaries..."
+cargo binstall dotlink kickoff workstyle ironbar
+
+### Install user applications
+#
+# Add your preferred applications here, vim, firefox etc.
+echo "Installing user applications..."
+sudo apk add firefox alacritty grimshot mpv imv helix taplo cmus
+
+### Install DBus
+#
+# DBus is a message bus system that provides a mechanism for inter-process communication.
+#
+# Some services rely on a D-Bus session instance or expect it by default (including Pipewire).
+# Other processes will only be able to communicate with these services if d-bus is running. 
+echo "Installing DBus..."
+sudo apk add dbus dbus-openrc
+sudo rc-update add dbus default
+sudo dbus-uuidgen --ensure
+
+### Install elogind
+#
+# elogind is a login manager and provides support for
+# - setting up necessary permissions for the desktop environment or window manager
+# - handling poweroff, reboot, suspend and hibernate via loginctl command
+echo "Installing elogind..."
+sudo apk add elogind
+sudo rc-update add elogind default
+
+### Install polkit
+#
+# Polkit is used for authentication. Without it some things may not function.
+echo "Installing polkit..."
+sudo apk add polkit polkit-elogind
+sudo rc-update add polkit default
+
+### Install greetd
+#
+# greetd acts as a system service that manages user sessions and provides a way for users
+# to log into their system or start new sessions.
+echo "Installing greetd..."
+sudo apk add greetd greetd-openrc greetd-agreety
+sudo rc-update add greetd default
+# Ensure greetd permissions
+sudo chmod -R go+r /etc/greetd
+sudo addgroup greetd video
+sudo addgroup greetd input
+
+### Dotfiles
+#
+# Link user dotfiles
+dotlink -p user --file dotlink.toml dotfiles
+# Link system configuration
+sudo dotlink -p system
+
+echo "Installation completed!"
+echo "Please reboot"

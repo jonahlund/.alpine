@@ -1,9 +1,9 @@
 [[user]]
-names = ['alacritty', 'helix', 'sway', 'gtk-3.0', 'fontconfig', 'fcitx5']
+names = ['alacritty', 'helix', 'sway']
 to = '~/.config'
 
 [[user]]
-names = ['.gitconfig', '.profile', '.tmux.conf']
+names = ['.gitconfig', '.profile']
 to = '~/'
 
 [[system]]

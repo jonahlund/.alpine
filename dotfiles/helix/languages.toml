@@ -1,4 +1,4 @@
-## -- Language Server Config --
+## ------ LSPs ------
 
 [language-server]
 biome = { command = "biome", args = ["lsp-proxy"] }
@@ -6,15 +6,7 @@ biome = { command = "biome", args = ["lsp-proxy"] }
 [language-server.rust-analyzer.config.check]
 command = "clippy"
 
-[language-server.sql-language-server]
-command = "sql-language-server"
-args = ["up", "--method", "stdio"]
-
-## -- Languages--
-
-[[language]]
-name = "sql"
-language-servers = ["sql-language-server"]
+## ------ Languages ------
 
 [[language]]
 name = "toml"
