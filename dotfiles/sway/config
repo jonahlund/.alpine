@@ -1,6 +1,4 @@
 ### Variables
-#
-# Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
 set $left h
@@ -32,6 +30,8 @@ input type:keyboard {
 ### Autostart
 exec_always --no-startup-id workstyle &> /tmp/workstyle.log
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
+exec /usr/libexec/pipewire-launcher
+exec /usr/libexec/xdg-desktop-portal-wlr
 
 ### Key bindings
 #
@@ -147,6 +147,13 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CU
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 #
+# Screenshots:
+#
+    bindsym Print exec grimshot copy area
+    bindsym Shift+Print exec grimshot copy screen
+    bindsym Control+Print exec grimshot save area ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
+    bindsym Control+Shift+Print exec grimshot save screen ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
+#
 # Resizing containers:
 #
 mode "resize" {
@@ -172,36 +179,29 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-### Screenshot configuration
-bindsym Print exec grimshot copy area
-bindsym Shift+Print exec grimshot copy screen
-bindsym Control+Print exec grimshot save area ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
-bindsym Control+Shift+Print exec grimshot save screen ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
-
-### Visual config
+### Visual configuration
 gaps outer 5
 gaps inner 10
 default_border pixel 3
 default_floating_border pixel 3
 focus_follows_mouse no
  
+### Nord theme
+#
 # Polar Night colors
 set $nord0 #2e3440
 set $nord1 #3b4252
 set $nord2 #434c5e
 set $nord3 #4c566a
-
 # Snow Storm colors
 set $nord4 #d8dee9
 set $nord5 #e5e9f0
 set $nord6 #eceff4
-
 # Frost colors
 set $nord7 #8fbcbb
 set $nord8 #88c0d0
 set $nord9 #81a1c1
 set $nord10 #5e81ac
-
 # Aurora colors
 set $nord11 #bf616a
 set $nord12 #d08770
@@ -209,12 +209,12 @@ set $nord13 #ebcb8b
 set $nord14 #a3be8c
 set $nord15 #b48ead
 
-# Client color configurations
-client.focused          $nord10 $nord3   $nord4   $nord7   $nord8
-client.focused_inactive $nord1  $nord2   $nord5   $nord1   $nord2
-client.unfocused        $nord1  $nord1   $nord5   $nord1   $nord1
-client.urgent           $nord11 $nord1   $nord5   $nord11  $nord11
-client.placeholder      $nord1  $nord1   $nord5   $nord1   $nord1
-client.focused_tab_title $nord1 $nord2   $nord5   $nord1
+### Client configuration
+client.focused          $nord9 $nord3 $nord4 $nord8 $nord9
+client.focused_inactive $nord1 $nord3 $nord6 $nord2 $nord3
+client.unfocused        $nord1 $nord1 $nord4 $nord0 $nord1
+client.urgent           $nord11 $nord12 $nord4 $nord11 $nord12
+client.placeholder      $nord0 $nord0 $nord4 $nord0 $nord0
+client.background       $nord0
 
 include /etc/sway/config.d/*

@@ -1,14 +1,8 @@
 #!/bin/sh
 
-set -e
-sudo setup-devd udev
-
-# Source the profile to have the correct environment variables set during installation
-. $HOME/.alpine/dotfiles/.profile
-
-### Install base packages
-echo "Installing base packages..."
-sudo apk add build-base openssl-dev fontconfig-dev bash curl wget
+### Install development packages
+echo "Installing development packages..."
+sudo apk add build-base openssl-dev fontconfig-dev bash curl wget libxkbcommon-dev libxkbfile-dev
 
 ### Install and configure graphic drivers
 #
@@ -19,7 +13,7 @@ sudo apk add build-base openssl-dev fontconfig-dev bash curl wget
 # For NVIDIA: https://wiki.alpinelinux.org/wiki/NVIDIA
 echo "Installing graphics..."
 sudo apk add linux-firmware-amdgpu mesa-dev mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
-# Add the kernel modules to load during boot
+# Append our kernel modules to /etc/modules
 # Edit these to your chipset
 echo amdgpu | sudo tee -a /etc/modules
 echo fbcon | sudo tee -a /etc/modules
@@ -34,12 +28,9 @@ echo "Installing xdg..."
 sudo apk add xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr
 xdg-user-dirs-update
 
-### Install wayland
-echo "Installing wayland..."
-sudo apk add wlroots wayland xwayland wl-clipboard
-
 ### Install sway
 echo "Installing sway..."
+sudo apk add wlroots wayland xwayland wl-clipboard
 sudo apk add sway swaylock swaybg swayidle
 
 ### Install rust
@@ -47,18 +38,17 @@ echo "Installing rust..."
 sudo apk add rustup sccache
 rustup-init -y --default-toolchain nightly
 . "$HOME/.cargo/env"
+# (optional) Install rust-analyzer
 rustup component add rust-analyzer
 
 ### Install fonts
+#
+# Add your preferred fonts here
 echo "Installing fonts..."
 sudo apk add font-jetbrains-mono-nerd
 fc-cache -fv
 
-### Install mandoc and respective documentations
-echo "Installing docs..."
-sudo apk add mandoc man-pages cmus-doc pipewire-doc elogind-doc
-
-### Install cargo-binstall
+### (optional) Install cargo-binstall
 echo "Installing cargo-binstall..."
 curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 
@@ -66,13 +56,15 @@ curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-
 #
 # Add your favorite rust binaries here
 echo "Installing cargo binaries..."
-cargo binstall dotlink kickoff workstyle ironbar
+cargo binstall workstyle
+# I couldn't get kickoff to work without static linking
+RUST_FLAGS=-Ctarget-feature=-crt-static cargo binstall kickoff
 
 ### Install user applications
 #
 # Add your preferred applications here, vim, firefox etc.
 echo "Installing user applications..."
-sudo apk add firefox alacritty grimshot mpv imv helix taplo cmus
+sudo apk add librewolf alacritty grimshot mpv imv helix taplo cmus
 
 ### Install DBus
 #
@@ -108,17 +100,8 @@ sudo rc-update add polkit default
 echo "Installing greetd..."
 sudo apk add greetd greetd-openrc greetd-agreety
 sudo rc-update add greetd default
-# Ensure greetd permissions
 sudo chmod -R go+r /etc/greetd
-sudo addgroup greetd video
-sudo addgroup greetd input
-
-### Dotfiles
-#
-# Link user dotfiles
-dotlink -p user --file dotlink.toml dotfiles
-# Link system configuration
-sudo dotlink -p system
-
-echo "Installation completed!"
-echo "Please reboot"
+# Add a greeter user
+sudo adduser greeter -G input
+# Copy our greetd configuration
+sudo cp -f $DIR/greetd/config.toml /etc/greetd
