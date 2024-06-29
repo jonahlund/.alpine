@@ -56,9 +56,9 @@ curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-
 #
 # Add your favorite rust binaries here
 echo "Installing cargo binaries..."
-cargo binstall workstyle
+cargo binstall workstyle -y
 # I couldn't get kickoff to work without static linking
-RUST_FLAGS=-Ctarget-feature=-crt-static cargo binstall kickoff
+RUST_FLAGS=-Ctarget-feature=-crt-static cargo binstall kickoff -y
 
 ### Install user applications
 #
