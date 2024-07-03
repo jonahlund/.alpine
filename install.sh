@@ -1,5 +1,7 @@
 #!/bin/sh
 
+DIR=$( dirname -- "$( readlink -f -- "$0"; )"; )
+
 ### Install development packages
 echo "Installing development packages..."
 sudo apk add build-base openssl-dev fontconfig-dev bash curl wget libxkbcommon-dev libxkbfile-dev
@@ -40,6 +42,7 @@ rustup-init -y --default-toolchain nightly
 . "$HOME/.cargo/env"
 # (optional) Install rust-analyzer
 rustup component add rust-analyzer
+ln -sf $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/rust-analyzer $HOME/.cargo/bin/rust-analyzer
 
 ### Install fonts
 #
@@ -48,17 +51,13 @@ echo "Installing fonts..."
 sudo apk add font-jetbrains-mono-nerd
 fc-cache -fv
 
-### (optional) Install cargo-binstall
-echo "Installing cargo-binstall..."
-curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-
 ### Install cargo binaries
 #
 # Add your favorite rust binaries here
 echo "Installing cargo binaries..."
-cargo binstall workstyle -y
-# I couldn't get kickoff to work without static linking
-RUST_FLAGS=-Ctarget-feature=-crt-static cargo binstall kickoff -y
+cargo install workstyle
+# I wasn't able to compile kickoff without static linking
+RUSTFLAGS=-Ctarget-feature=-crt-static cargo install kickoff
 
 ### Install user applications
 #
@@ -100,8 +99,8 @@ sudo rc-update add polkit default
 echo "Installing greetd..."
 sudo apk add greetd greetd-openrc greetd-agreety
 sudo rc-update add greetd default
-sudo chmod -R go+r /etc/greetd
-# Add a greeter user
-sudo adduser greeter -G input
 # Copy our greetd configuration
-sudo cp -f $DIR/greetd/config.toml /etc/greetd
+sudo cp -f -R $DIR/greetd /etc/greetd
+sudo chmod -R go+r /etc/greetd
+# Ensure greeter permissions
+sudo addgroup greetd input
