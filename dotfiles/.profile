@@ -5,7 +5,7 @@ export VDPAU_DRIVER=radeonsi
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 
 export TERM=alacritty
-export BROWSER=firefox
+export BROWSER=librewolf
 
 export RUSTC_WRAPPER=sccache 
 

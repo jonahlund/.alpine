@@ -100,6 +100,7 @@ echo "Installing greetd..."
 sudo apk add greetd greetd-openrc greetd-agreety
 sudo rc-update add greetd default
 # Copy our greetd configuration
+sudo rm -rf /etc/greetd
 sudo cp -f -R $DIR/greetd /etc/greetd
 sudo chmod -R go+r /etc/greetd
 # Ensure greeter permissions
