@@ -55,9 +55,7 @@ fc-cache -fv
 #
 # Add your favorite rust binaries here
 echo "Installing cargo binaries..."
-cargo install workstyle
-# I wasn't able to compile kickoff without static linking
-RUSTFLAGS=-Ctarget-feature=-crt-static cargo install kickoff
+cargo install workstyle kickoff
 
 ### Install user applications
 #

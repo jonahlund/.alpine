@@ -16,6 +16,12 @@ idle-timeout = 100
 select = "underline"
 
 [keys.normal]
-"C-u" = ["page_cursor_half_up", "goto_window_center"]
-"C-d" = ["page_cursor_half_down", "goto_window_center"]
+C-u = ["page_cursor_half_up", "goto_window_center"]
+C-d = ["page_cursor_half_down", "goto_window_center"]
 esc = ["collapse_selection", "keep_primary_selection"]
+A-x = "extend_to_line_bounds"
+X = ["extend_line_up", "extend_to_line_bounds"]
+
+[keys.select]
+A-x = "extend_to_line_bounds"
+X = ["extend_line_up", "extend_to_line_bounds"]
