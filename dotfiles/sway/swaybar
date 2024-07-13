@@ -4,8 +4,6 @@
 COLOR1=#d8dee9
 COLOR2=#eceff4
 
-INTERFACE="eth0"
-
 get_cpu_usage() {
     # Print the average CPU usage over the last 1 minute
     # We use awk to get the first value from the output of uptime, which is the 1-minute load average
@@ -30,6 +28,6 @@ while true; do
     disk_usage=$(get_disk_usage)
     date_output=$(date +'%a %-d %b %H:%M')
 
-    echo "<span font_weight=\"600\"><span foreground=\"${COLOR1}\">$cpu_usage</span>  <span foreground=\"${COLOR1}\">$ram_usage</span>  <span foreground=\"${COLOR1}\">$disk_usage</span>  <span foreground=\"${COLOR1}\">$date_output</span></span>"
+    echo "<span font_weight=\"600\"><span foreground=\"${COLOR1}\">$cpu_usage</span>   <span foreground=\"${COLOR1}\">$ram_usage</span>   <span foreground=\"${COLOR1}\">$disk_usage</span>   <span foreground=\"${COLOR1}\">$date_output</span></span>"
     sleep 5
 done

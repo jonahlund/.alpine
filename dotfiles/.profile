@@ -1,15 +1,14 @@
 export WLR_DRM_DEVICES=/dev/dri/card1
-export XCURSOR_THEME=Adwaita
 
 export VK_KHR_surface=wayland
 export VDPAU_DRIVER=radeonsi
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 
 export TERM=alacritty
-export BROWSER=firefox
+export BROWSER=librewolf
 
-#export RUSTFLAGS=-Ctarget-feature=-crt-static
 export RUSTC_WRAPPER=sccache 
+export RUSTFLAGS=-Ctarget-feature=-crt-static
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx

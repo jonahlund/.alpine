@@ -1,13 +1,6 @@
-### Runtime
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
-exec /usr/libexec/pipewire-launcher
-exec /usr/libexec/xdg-desktop-portal-wlr
-
-### Autostart
-# exec fcitx5 &
-
 ### Variables
 set $mod Mod4
+# Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
@@ -15,46 +8,30 @@ set $right l
 set $term alacritty
 set $menu kickoff | xargs swaymsg exec --
 
-### Colors
-set $nord0 #2E3440
-set $nord1 #3B4252
-set $nord2 #434C5E
-set $nord3 #4C566A
-set $nord4 #D8DEE9
-set $nord5 #E5E9F0
-set $nord6 #ECEFF4
-set $nord7 #8FBCBB
-set $nord8 #88C0D0
-set $nord9 #81A1C1
-set $nord10 #5E81AC
-set $nord11 #BF616A
-set $nord12 #D08770
-set $nord13 #EBCB8B
-set $nord14 #A3BE8C
-set $nord15 #B48EAD
-
 ### Output configuration
-output * bg "$HOME/.alpine/bg.png" fill
-
-output HDMI-A-1 {
-   mode 1920x1080@144Hz
-}
-
-output DP-1 {
-   mode 1920x1080@144Hz
-}
-
+#
+# Nord wallpaper
+output * bg $HOME/.alpine/bg.png fill
+# Monitors
+output HDMI-A-1 mode 1920x1080@144Hz
+output DP-1 mode 1920x1080@144Hz
 
 ### Idle configuration
 exec swayidle -w \
-         timeout 800 'swaylock -f -c 000000' \
-         timeout 1000 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
 ### Input configuration
 input type:keyboard {
     xkb_layout se
 }
+
+### Autostart
+exec_always --no-startup-id workstyle &> /tmp/workstyle.log
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
+exec /usr/libexec/pipewire-launcher
+exec /usr/libexec/xdg-desktop-portal-wlr
 
 ### Key bindings
 #
@@ -81,13 +58,6 @@ input type:keyboard {
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-#
-# Screenshots:
-#
-	bindsym Print exec grimshot copy area
-	bindsym Shift+Print exec grimshot copy screen
-	bindsym Control+Print exec grimshot save area ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
-	bindsym Control+Shift+Print exec grimshot save screen ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
 #
 # Moving around:
 #
@@ -177,6 +147,13 @@ input type:keyboard {
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 #
+# Screenshots:
+#
+    bindsym Print exec grimshot copy area
+    bindsym Shift+Print exec grimshot copy screen
+    bindsym Control+Print exec grimshot save area ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
+    bindsym Control+Shift+Print exec grimshot save screen ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
+#
 # Resizing containers:
 #
 mode "resize" {
@@ -184,16 +161,16 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 150px
-    bindsym $down resize grow height 150px
-    bindsym $up resize shrink height 150px
-    bindsym $right resize grow width 150px
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 150px
-    bindsym Down resize grow height 150px
-    bindsym Up resize shrink height 150px
-    bindsym Right resize grow width 150px
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
 
     # Return to default mode
     bindsym Return mode "default"
@@ -202,19 +179,37 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Visuals:
-#
+### Visual configuration
 gaps outer 5
 gaps inner 10
 default_border pixel 3
 default_floating_border pixel 3
-for_window [class=".*"] border pixel 3
 focus_follows_mouse no
+ 
+### Nord theme
+#
+# Polar Night colors
+set $nord0 #2e3440
+set $nord1 #3b4252
+set $nord2 #434c5e
+set $nord3 #4c566a
+# Snow Storm colors
+set $nord4 #d8dee9
+set $nord5 #e5e9f0
+set $nord6 #eceff4
+# Frost colors
+set $nord7 #8fbcbb
+set $nord8 #88c0d0
+set $nord9 #81a1c1
+set $nord10 #5e81ac
+# Aurora colors
+set $nord11 #bf616a
+set $nord12 #d08770
+set $nord13 #ebcb8b
+set $nord14 #a3be8c
+set $nord15 #b48ead
 
-#
-# Client Colors:
-#
+### Client configuration
 client.focused          $nord9 $nord3 $nord4 $nord8 $nord9
 client.focused_inactive $nord1 $nord3 $nord6 $nord2 $nord3
 client.unfocused        $nord1 $nord1 $nord4 $nord0 $nord1
@@ -228,7 +223,7 @@ client.background       $nord0
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-    status_command ~/.config/sway/swaybar
+    status_command $HOME/.config/sway/swaybar
     pango_markup yes
 
     colors {

@@ -1,5 +1,0 @@
-**/*.cbor
-# Ignore helix runtime
-helix/runtime
-# Ignore language cache
-fcitx5/conf
