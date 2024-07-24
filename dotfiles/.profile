@@ -19,7 +19,8 @@ export XDG_SESSION_DESKTOP=sway
 export XDG_CURRENT_DESKTOP=sway
 
 export MOZ_ENABLE_WAYLAND=1
-export QT_QPA_PLATFORM=wayland
+export VK_KHR_surface=wayland
+export QT_QPA_PLATFORM=xcb
 
 export PATH="$HOME/.yarn/bin:$PATH"
 
@@ -27,4 +28,4 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
-export HELIX_RUNTIME=/usr/lib/helix
+export HELIX_RUNTIME=$HOME/.config/helix/runtime

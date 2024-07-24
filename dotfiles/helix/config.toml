@@ -11,9 +11,13 @@ text-width = 80
 cursorline = true
 color-modes = true
 idle-timeout = 100
+end-of-line-diagnostics = "hint"
 
 [editor.cursor-shape]
 select = "underline"
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
 
 [keys.normal]
 C-u = ["page_cursor_half_up", "goto_window_center"]
