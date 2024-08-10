@@ -28,4 +28,4 @@ if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
-export HELIX_RUNTIME=$HOME/.config/helix/runtime
+export HELIX_RUNTIME=$HOME/Code/helix/runtime
