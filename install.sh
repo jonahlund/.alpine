@@ -61,7 +61,7 @@ cargo install workstyle kickoff
 #
 # Add your preferred applications here, vim, firefox etc.
 echo "Installing user applications..."
-sudo apk add librewolf alacritty grimshot mpv imv helix taplo cmus
+sudo apk add librewolf alacritty grimshot mpv imv taplo
 
 ### Install DBus
 #
