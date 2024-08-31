@@ -74,21 +74,14 @@ sudo apk add dbus dbus-openrc
 sudo rc-update add dbus default
 sudo dbus-uuidgen --ensure
 
-### Install elogind
+### Install seatd
 #
-# elogind is a login manager and provides support for
+# seatd is a minimal seat management daemon that
+# - takes care of mediating access to shared devices (graphics, input)
 # - setting up necessary permissions for the desktop environment or window manager
-# - handling poweroff, reboot, suspend and hibernate via loginctl command
-echo "Installing elogind..."
-sudo apk add elogind
-sudo rc-update add elogind default
-
-### Install polkit
-#
-# Polkit is used for authentication. Without it some things may not function.
-echo "Installing polkit..."
-sudo apk add polkit polkit-elogind
-sudo rc-update add polkit default
+echo "Installing seatd..."
+sudo apk add seatd seatd-launch seatd-openrc
+sudo rc-update add seatd default
 
 ### Install greetd
 #
