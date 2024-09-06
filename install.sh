@@ -23,7 +23,7 @@ echo fbcon | sudo tee -a /etc/modules
 ### Install pipewire
 echo "Installing pipewire..."
 sudo apk add pipewire pipewire-tools pipewire-spa-tools pipewire-pulse pipewire-spa-vulkan
-sudo apk add wireplumber wireplumber-logind
+sudo apk add wireplumber
 
 ### Install xdg
 echo "Installing xdg..."
@@ -95,4 +95,4 @@ sudo rm -rf /etc/greetd
 sudo cp -f -R $DIR/greetd /etc/greetd
 sudo chmod -R go+r /etc/greetd
 # Ensure greeter permissions
-sudo addgroup greetd input
+sudo addgroup greetd input seat
