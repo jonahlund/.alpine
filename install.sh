@@ -23,7 +23,7 @@ echo fbcon | sudo tee -a /etc/modules
 ### Install pipewire
 echo "Installing pipewire..."
 sudo apk add pipewire pipewire-tools pipewire-spa-tools pipewire-pulse pipewire-spa-vulkan
-sudo apk add wireplumber
+sudo apk add wireplumber wireplumber-logind
 
 ### Install xdg
 echo "Installing xdg..."
@@ -74,14 +74,21 @@ sudo apk add dbus dbus-openrc
 sudo rc-update add dbus default
 sudo dbus-uuidgen --ensure
 
-### Install seatd
+### Install elogind
 #
-# seatd is a minimal seat management daemon that
-# - takes care of mediating access to shared devices (graphics, input)
+# elogind is a login manager and provides support for
 # - setting up necessary permissions for the desktop environment or window manager
-echo "Installing seatd..."
-sudo apk add seatd seatd-launch seatd-openrc
-sudo rc-update add seatd default
+# - handling poweroff, reboot, suspend and hibernate via loginctl command
+echo "Installing elogind..."
+sudo apk add elogind
+sudo rc-update add elogind default
+
+### Install polkit
+#
+# Polkit is used for authentication. Without it some things may not function.
+echo "Installing polkit..."
+sudo apk add polkit polkit-elogind
+sudo rc-update add polkit default
 
 ### Install greetd
 #
@@ -95,6 +102,4 @@ sudo rm -rf /etc/greetd
 sudo cp -f -R $DIR/greetd /etc/greetd
 sudo chmod -R go+r /etc/greetd
 # Ensure greeter permissions
-sudo addgroup $USER seat
 sudo addgroup greetd input
-sudo addgroup greetd seat
