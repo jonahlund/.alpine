@@ -95,4 +95,6 @@ sudo rm -rf /etc/greetd
 sudo cp -f -R $DIR/greetd /etc/greetd
 sudo chmod -R go+r /etc/greetd
 # Ensure greeter permissions
-sudo addgroup greetd input seat
+sudo addgroup $USER seat
+sudo addgroup greetd input
+sudo addgroup greetd seat
