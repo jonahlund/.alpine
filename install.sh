@@ -14,11 +14,11 @@ sudo apk add build-base openssl-dev fontconfig-dev bash curl wget libxkbcommon-d
 # For AMD/Radeon: https://wiki.alpinelinux.org/wiki/Radeon_Video
 # For NVIDIA: https://wiki.alpinelinux.org/wiki/NVIDIA
 echo "Installing graphics..."
-sudo apk add linux-firmware-amdgpu mesa-dev mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
+sudo apk add mesa-dev mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
 # Append our kernel modules to /etc/modules
 # Edit these to your chipset
-echo amdgpu | sudo tee -a /etc/modules
-echo fbcon | sudo tee -a /etc/modules
+# echo amdgpu | sudo tee -a /etc/modules
+# echo fbcon | sudo tee -a /etc/modules
 
 ### Install pipewire
 echo "Installing pipewire..."
@@ -38,24 +38,10 @@ sudo apk add sway swaylock swaybg swayidle
 ### Install rust
 echo "Installing rust..."
 sudo apk add rustup sccache
-rustup-init -y --default-toolchain nightly
+rustup-init -y --default-toolchain stable
 . "$HOME/.cargo/env"
 # (optional) Install rust-analyzer
 rustup component add rust-analyzer
-ln -sf $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/rust-analyzer $HOME/.cargo/bin/rust-analyzer
-
-### Install fonts
-#
-# Add your preferred fonts here
-echo "Installing fonts..."
-sudo apk add font-jetbrains-mono-nerd
-fc-cache -fv
-
-### Install cargo binaries
-#
-# Add your favorite rust binaries here
-echo "Installing cargo binaries..."
-cargo install workstyle kickoff
 
 ### Install user applications
 #

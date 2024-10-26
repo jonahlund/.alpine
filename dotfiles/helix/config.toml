@@ -1,5 +1,3 @@
-theme = "nord"
-
 [editor.indent-guides]
 render = true
 character = "▏"
@@ -11,21 +9,10 @@ text-width = 80
 cursorline = true
 color-modes = true
 idle-timeout = 100
-end-of-line-diagnostics = "hint"
+# end-of-line-diagnostics = "hint"
 
 [editor.cursor-shape]
 select = "underline"
 
-[editor.inline-diagnostics]
-cursor-line = "warning"
-
-[keys.normal]
-C-u = ["page_cursor_half_up", "goto_window_center"]
-C-d = ["page_cursor_half_down", "goto_window_center"]
-esc = ["collapse_selection", "keep_primary_selection"]
-A-x = "extend_to_line_bounds"
-X = ["extend_line_up", "extend_to_line_bounds"]
-
-[keys.select]
-A-x = "extend_to_line_bounds"
-X = ["extend_line_up", "extend_to_line_bounds"]
+# [editor.inline-diagnostics]
+# cursor-line = "warning"
