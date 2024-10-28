@@ -14,7 +14,7 @@ sudo apk add build-base openssl-dev fontconfig-dev bash curl wget libxkbcommon-d
 # For AMD/Radeon: https://wiki.alpinelinux.org/wiki/Radeon_Video
 # For NVIDIA: https://wiki.alpinelinux.org/wiki/NVIDIA
 echo "Installing graphics..."
-sudo apk add linux-firmware-amdgpu linux-firmware-amd mesa-dev mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
+sudo apk add linux-firmware-amdgpu mesa-dev mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
 # Append our kernel modules to /etc/modules
 # Edit these to your chipset
 echo amdgpu | sudo tee -a /etc/modules
@@ -23,6 +23,7 @@ echo fbcon | sudo tee -a /etc/modules
 ### Install pipewire
 echo "Installing pipewire..."
 sudo apk add pipewire pipewire-tools pipewire-spa-tools pipewire-pulse pipewire-spa-vulkan
+sudo apk add wireplumber wireplumber-logind
 
 ### Install xdg
 echo "Installing xdg..."
@@ -48,6 +49,7 @@ ln -sf $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/rust-analy
 # Add your preferred fonts here
 echo "Installing fonts..."
 sudo apk add font-jetbrains-mono-nerd
+fc-cache -fv
 
 ### Install cargo binaries
 #
