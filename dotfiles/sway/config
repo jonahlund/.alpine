@@ -28,8 +28,8 @@ input type:keyboard {
 }
 
 ### Autostart
-exec_always --no-startup-id workstyle &> /tmp/workstyle.log
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
+exec --no-startup-id workstyle &> /tmp/workstyle.log
+exec dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
 exec /usr/libexec/pipewire-launcher
 exec /usr/libexec/xdg-desktop-portal-wlr
 
@@ -180,10 +180,10 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 ### Visual configuration
-gaps outer 5
-gaps inner 10
-default_border pixel 3
-default_floating_border pixel 3
+gaps outer 2
+gaps inner 5
+default_border pixel 2
+default_floating_border pixel 2
 focus_follows_mouse no
  
 ### Nord theme
