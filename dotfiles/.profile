@@ -3,6 +3,8 @@ export WLR_DRM_DEVICES=/dev/dri/card1
 export VK_KHR_surface=wayland
 export VDPAU_DRIVER=radeonsi
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
+export SDL_VIDEODRIVER=wayland
+export WLR_RENDERER=vulkan
 
 export TERM=alacritty
 export BROWSER=librewolf
@@ -19,8 +21,9 @@ export XDG_SESSION_DESKTOP=sway
 export XDG_CURRENT_DESKTOP=sway
 
 export MOZ_ENABLE_WAYLAND=1
-export VK_KHR_surface=wayland
-export QT_QPA_PLATFORM=xcb
+export GDK_BACKEND=wayland
+export QT_QPA_PLATFORM=wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
 export PATH="$HOME/.yarn/bin:$PATH"
 

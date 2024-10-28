@@ -1,4 +1,6 @@
 ### Variables
+#
+# Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
 set $left h
@@ -9,12 +11,14 @@ set $term alacritty
 set $menu kickoff | xargs swaymsg exec --
 
 ### Output configuration
-#
-# Nord wallpaper
-output * bg $HOME/.alpine/bg.png fill
-# Monitors
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 output HDMI-A-1 mode 1920x1080@144Hz
 output DP-1 mode 1920x1080@144Hz
+
+### Input configuration
+input type:keyboard {
+    xkb_layout se
+}
 
 ### Idle configuration
 exec swayidle -w \
@@ -22,16 +26,11 @@ exec swayidle -w \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
-### Input configuration
-input type:keyboard {
-    xkb_layout se
-}
-
 ### Autostart
-exec_always --no-startup-id workstyle &> /tmp/workstyle.log
-exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
-exec /usr/libexec/pipewire-launcher
+exec workstyle &> /tmp/workstyle.log
+exec dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
 exec /usr/libexec/xdg-desktop-portal-wlr
+exec /usr/libexec/pipewire-launcher
 
 ### Key bindings
 #
@@ -161,16 +160,16 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 110px
-    bindsym $down resize grow height 110px
-    bindsym $up resize shrink height 110px
-    bindsym $right resize grow width 110px
+    bindsym $left resize shrink width 150px
+    bindsym $down resize grow height 150px
+    bindsym $up resize shrink height 150px
+    bindsym $right resize grow width 150px
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 110px
-    bindsym Down resize grow height 110px
-    bindsym Up resize shrink height 110px
-    bindsym Right resize grow width 110px
+    bindsym Left resize shrink width 150px
+    bindsym Down resize grow height 150px
+    bindsym Up resize shrink height 150px
+    bindsym Right resize grow width 150px
 
     # Return to default mode
     bindsym Return mode "default"
@@ -179,30 +178,23 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-### Visual configuration
-gaps outer 5
-gaps inner 10
-default_border pixel 3
-default_floating_border pixel 3
-focus_follows_mouse no
- 
+default_border none
+gaps inner 8
+gaps outer 2
+font "JetBrainsMono Nerd Font" 10
+
 ### Nord theme
-#
-# Polar Night colors
 set $nord0 #2e3440
 set $nord1 #3b4252
 set $nord2 #434c5e
 set $nord3 #4c566a
-# Snow Storm colors
 set $nord4 #d8dee9
 set $nord5 #e5e9f0
 set $nord6 #eceff4
-# Frost colors
 set $nord7 #8fbcbb
 set $nord8 #88c0d0
 set $nord9 #81a1c1
 set $nord10 #5e81ac
-# Aurora colors
 set $nord11 #bf616a
 set $nord12 #d08770
 set $nord13 #ebcb8b
