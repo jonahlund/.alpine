@@ -1,0 +1,24 @@
+theme = "ferra"
+
+[editor.indent-guides]
+render = true
+character = "▏"
+skip-levels = 1
+
+[editor]
+line-number = "relative"
+text-width = 80
+cursorline = true
+color-modes = true
+idle-timeout = 100
+end-of-line-diagnostics = "hint"
+
+[editor.cursor-shape]
+select = "underline"
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+
+[keys.normal]
+C-u = ["page_cursor_half_up", "align_view_center"]
+C-d = ["page_cursor_half_down", "align_view_center"]

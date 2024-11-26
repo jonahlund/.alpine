@@ -1,0 +1,14 @@
+"alacritty" = ""
+"github" = ""
+"rust" = ""
+"private browsing" = ""
+"firefox" = ""
+"file manager" = ""
+"transmission" = ""
+"mpv" = ""
+"music" = ""
+"librewolf" = ""
+
+[other]
+fallback_icon = "🤨"
+deduplicate_icons = false
