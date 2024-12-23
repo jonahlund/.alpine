@@ -5,11 +5,11 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $term alacritty
+set $term foot
 set $menu kickoff | xargs swaymsg exec --
 
 ### Output configuration
-exec_always swaybg -c 2b292d
+exec_always swaybg -c 0c0c0c
 # Monitors
 output DP-1     pos 0    0 mode 1920x1080@143.998Hz
 output HDMI-A-1 pos 1920 0 mode 1920x1080@143.998Hz
@@ -187,45 +187,16 @@ gaps inner 5
 default_border pixel 2
 default_floating_border pixel 2
 focus_follows_mouse no
- 
-### Ferra theme
-set $night 	#2b292d
-set $ash 	  #383539
-set $umber 	#4d424b
-set $bark 	#6f5d63
-set $mist 	#d1d1e0
-set $sage 	#b1b695
-set $blush 	#fecdb2
-set $coral 	#ffa07a
-set $rose 	#f6b6c9
-set $ember 	#e06b75
-set $honey 	#f5d76e
 
-# target                 title  bg     text   indicator  border
-client.focused           $sage  $night $blush $rose      $blush    
-client.focused_inactive  $ash   $night $blush $rose      $ash
-client.unfocused         $ash   $night $blush $rose      $ash
-client.urgent            $coral $night $coral $ash       $coral
-client.placeholder       $ash   $night $blush $ash       $ash
-client.background        $night
-
-# bar
 bar {
     status_command $HOME/.config/sway/swaybar
     position top
     pango_markup yes
 
     colors {
-        background         $night
-        statusline         $blush
-        focused_statusline $blush
-        focused_separator  $night
-
-        # target           border  bg     text
-        focused_workspace  $blush  $blush $night
-        active_workspace   $umber  $umber $blush
-        inactive_workspace $night  $night $blush
-        urgent_workspace   $ember  $ember $night
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
     }
 }
 
