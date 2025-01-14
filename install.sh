@@ -4,7 +4,12 @@ DIR=$( dirname -- "$( readlink -f -- "$0"; )"; )
 
 ### Install development packages
 echo "Installing development packages..."
-sudo apk add build-base openssl-dev fontconfig-dev bash curl wget libxkbcommon-dev libxkbfile-dev
+sudo apk add build-base openssl-dev fontconfig-dev bash curl wget libxkbcommon-dev libxkbfile-dev mold
+
+### Install awall
+sudo apk add awall iptables
+# Configure awall
+sudo rc-update add iptables
 
 ### Install and configure graphic drivers
 #
@@ -27,7 +32,7 @@ sudo apk add wireplumber wireplumber-logind
 
 ### Install xdg
 echo "Installing xdg..."
-sudo apk add xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr
+sudo apk add xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr xdg-utils
 xdg-user-dirs-update
 
 ### Install sway
@@ -61,7 +66,7 @@ cargo install workstyle kickoff
 #
 # Add your preferred applications here, vim, firefox etc.
 echo "Installing user applications..."
-sudo apk add librewolf alacritty grimshot mpv imv taplo
+sudo apk add librewolf foot grimshot mpv imv taplo
 
 ### Install DBus
 #
