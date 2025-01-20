@@ -53,7 +53,7 @@ ln -sf $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/rust-analy
 #
 # Add your preferred fonts here
 echo "Installing fonts..."
-sudo apk add font-jetbrains-mono-nerd
+sudo apk add font-jetbrains-mono-nerd font-noto-cjk
 fc-cache -fv
 
 ### Install cargo binaries
@@ -67,6 +67,11 @@ cargo install workstyle kickoff
 # Add your preferred applications here, vim, firefox etc.
 echo "Installing user applications..."
 sudo apk add librewolf foot grimshot mpv imv taplo
+
+### Install Fcitx5
+#
+# Fcitx5 is is an input method framework with extension support.
+sudo apk add fcitx5 fcitx5-anthy fcitx5-anthy-lang 
 
 ### Install DBus
 #
