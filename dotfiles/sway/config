@@ -30,7 +30,7 @@ exec --no-startup-id workstyle &> /tmp/workstyle.log
 exec dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
 exec /usr/libexec/pipewire-launcher
 exec /usr/libexec/xdg-desktop-portal-wlr
-exec --no-startup-id fcitx5 -d
+# exec --no-startup-id fcitx5 -d
 
 ### Key bindings
 #
@@ -152,10 +152,10 @@ exec --no-startup-id fcitx5 -d
 #
 # Screenshots:
 #
-    bindsym Print exec grimshot copy area
-    bindsym Shift+Print exec grimshot copy screen
-    bindsym Control+Print exec grimshot save area ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
-    bindsym Control+Shift+Print exec grimshot save screen ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
+    bindsym $mod+p exec grimshot copy area
+    bindsym $mod+Shift+p exec grimshot copy screen
+    bindsym $mod+Control+p exec grimshot save area ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
+    bindsym $mod+Control+shift+p exec grimshot save screen ~/Pictures/$(date +%d-%m-%Y-%H-%M-%S).png
 #
 # Resizing containers:
 #
