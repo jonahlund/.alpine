@@ -6,10 +6,9 @@ DIR=$( dirname -- "$( readlink -f -- "$0"; )"; )
 echo "Installing development packages..."
 sudo apk add build-base openssl-dev fontconfig-dev bash curl wget libxkbcommon-dev libxkbfile-dev mold
 
-### Install awall
-sudo apk add awall iptables
-# Configure awall
-sudo rc-update add iptables
+### Install and configure nftables
+sudo apk add nftables
+sudo rc-update add nftables boot
 
 ### Install and configure graphic drivers
 #
@@ -20,10 +19,6 @@ sudo rc-update add iptables
 # For NVIDIA: https://wiki.alpinelinux.org/wiki/NVIDIA
 echo "Installing graphics..."
 sudo apk add linux-firmware-amdgpu mesa-dev mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
-# Append our kernel modules to /etc/modules
-# Edit these to your chipset
-echo amdgpu | sudo tee -a /etc/modules
-echo fbcon | sudo tee -a /etc/modules
 
 ### Install pipewire
 echo "Installing pipewire..."
