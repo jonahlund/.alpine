@@ -23,6 +23,7 @@ exec swayidle -w \
 ### Input configuration
 input type:keyboard {
     xkb_layout se
+    xkb_options caps:swapescape
 }
 
 ### Autostart
