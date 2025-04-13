@@ -8,8 +8,7 @@ export TERM=alacritty
 export BROWSER=librewolf
 
 export RUSTC_WRAPPER=sccache 
-export RUSTFLAGS="-Ctarget-feature=-crt-static"
-# export RUSTFLAGS="-Ctarget-feature=-crt-static -Zthreads=4 -Clink-arg=-fuse-ld=mold"
+export RUSTFLAGS="-Ctarget-feature=-crt-static -Zthreads=4 -Clink-arg=-fuse-ld=mold"
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
