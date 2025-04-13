@@ -8,7 +8,8 @@ export TERM=alacritty
 export BROWSER=librewolf
 
 export RUSTC_WRAPPER=sccache 
-export RUSTFLAGS="-Ctarget-feature=-crt-static -Zgc -Zthreads=4 -Clink-arg=-fuse-ld=mold"
+export RUSTFLAGS="-Ctarget-feature=-crt-static"
+# export RUSTFLAGS="-Ctarget-feature=-crt-static -Zthreads=4 -Clink-arg=-fuse-ld=mold"
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
@@ -24,3 +25,5 @@ export QT_QPA_PLATFORM=wayland
 if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
+
+export PATH=$PATH:$HOME/.alpine/bin

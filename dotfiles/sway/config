@@ -31,6 +31,7 @@ exec --no-startup-id workstyle &> /tmp/workstyle.log
 exec dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
 exec /usr/libexec/pipewire-launcher
 exec /usr/libexec/xdg-desktop-portal-wlr
+exec fcitx5
 # exec --no-startup-id fcitx5 -d
 
 ### Key bindings
