@@ -6,7 +6,7 @@ set $down j
 set $up k
 set $right l
 set $term foot
-set $menu kickoff | xargs swaymsg exec --
+set $menu rofi -show drun | xargs swaymsg exec --
 
 ### Output configuration
 exec_always swaybg -c 0c0c0c

@@ -55,13 +55,13 @@ fc-cache -fv
 #
 # Add your favorite rust binaries here
 echo "Installing cargo binaries..."
-cargo install workstyle kickoff
+cargo install workstyle
 
 ### Install user applications
 #
 # Add your preferred applications here, vim, firefox etc.
 echo "Installing user applications..."
-sudo apk add librewolf foot grimshot mpv imv taplo
+sudo apk add librewolf foot grimshot mpv imv taplo rofi
 
 ### Install Fcitx5
 #
