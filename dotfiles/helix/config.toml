@@ -10,7 +10,7 @@ line-number = "relative"
 text-width = 80
 cursorline = true
 color-modes = true
-idle-timeout = 50
+idle-timeout = 20
 end-of-line-diagnostics = "hint"
 
 [editor.cursor-shape]
