@@ -4,7 +4,7 @@ export VK_KHR_surface=wayland
 export VDPAU_DRIVER=radeonsi
 export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 
-export TERM=alacritty
+export TERM=foot
 export BROWSER=librewolf
 export GIT_EDITOR=hx
 
