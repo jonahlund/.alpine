@@ -27,3 +27,4 @@ if [ -f "$HOME/.cargo/env" ]; then
 fi
 
 export PATH=$PATH:$HOME/.alpine/bin
+export HELIX_RUNTIME=/usr/share/helix/runtime
