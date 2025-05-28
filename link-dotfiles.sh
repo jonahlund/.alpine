@@ -10,4 +10,5 @@ ln -sf "$DOTFILES/foot" \
   "$DOTFILES/fontconfig" \
   "$DOTFILES/gtk-3.0" \
   "$DOTFILES/workstyle" \
+  "$DOTFILES/tmux" \
   "$HOME/.config"

@@ -4,7 +4,11 @@ DIR=$( dirname -- "$( readlink -f -- "$0"; )"; )
 
 ### Install development packages
 echo "Installing development packages..."
-sudo apk add build-base openssl-dev fontconfig-dev bash curl wget libxkbcommon-dev libxkbfile-dev
+sudo apk add build-base openssl-dev fontconfig-dev bash curl wget libxkbcommon-dev libxkbfile-dev mold
+
+### Install and configure nftables
+sudo apk add nftables
+sudo rc-update add nftables boot
 
 ### Install and configure graphic drivers
 #
@@ -28,7 +32,7 @@ sudo apk add wireplumber wireplumber-logind
 
 ### Install xdg
 echo "Installing xdg..."
-sudo apk add xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr
+sudo apk add xdg-user-dirs xdg-desktop-portal xdg-desktop-portal-wlr xdg-utils
 xdg-user-dirs-update
 
 ### Install sway
@@ -49,20 +53,25 @@ ln -sf $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-musl/bin/rust-analy
 #
 # Add your preferred fonts here
 echo "Installing fonts..."
-sudo apk add font-jetbrains-mono-nerd
+sudo apk add font-jetbrains-mono-nerd font-noto-cjk
 fc-cache -fv
 
 ### Install cargo binaries
 #
 # Add your favorite rust binaries here
 echo "Installing cargo binaries..."
-cargo install workstyle kickoff
+cargo install workstyle
 
 ### Install user applications
 #
 # Add your preferred applications here, vim, firefox etc.
 echo "Installing user applications..."
-sudo apk add librewolf alacritty grimshot mpv imv taplo
+sudo apk add librewolf foot grimshot mpv imv taplo rofi
+
+### Install Fcitx5
+#
+# Fcitx5 is is an input method framework with extension support.
+sudo apk add fcitx5 fcitx5-anthy fcitx5-anthy-lang 
 
 ### Install DBus
 #

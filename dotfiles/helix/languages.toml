@@ -5,3 +5,11 @@ command = "clippy"
 name = "toml"
 formatter = { command = "taplo", args = ["fmt", "-"] }
 auto-format = true
+
+[language-server.iwe]
+command = "iwes"
+
+[[language]]
+name = "markdown"
+language-servers = ["iwe"] # you might want more LSPs in here
+auto-format = true         # optional, enable format-on-save
