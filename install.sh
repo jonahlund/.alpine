@@ -18,12 +18,9 @@ sudo rc-update add nftables boot
 # For AMD/Radeon: https://wiki.alpinelinux.org/wiki/Radeon_Video
 # For NVIDIA: https://wiki.alpinelinux.org/wiki/NVIDIA
 echo "Installing graphics..."
-#sudo apk add linux-firmware-amdgpu mesa-dev mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
 sudo apk add intel-media-driver mesa-dev mesa-dri-gallium mesa-va-gallium mesa-vulkan-ati
-# Append our kernel modules to /etc/modules
-# Edit these to your chipset
-#echo amdgpu | sudo tee -a /etc/modules
-#echo fbcon | sudo tee -a /etc/modules
+# Install firmware
+sudo apk add linux-firmware-i915 linux-firmware-intel linux-firmware-mediatek linux-firmware-other linux-firmware-rtl_bt
 
 ### Install pipewire
 echo "Installing pipewire..."
