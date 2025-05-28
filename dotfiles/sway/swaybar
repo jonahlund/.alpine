@@ -2,28 +2,49 @@
 
 get_cpu_usage() {
     # Print the average CPU usage over the last 1 minute
-    # We use awk to get the first value from the output of uptime, which is the 1-minute load average
     echo $(uptime | awk -F'[a-z]:' '{print $2}' | cut -f1 -d,)
 }
 
 get_ram_usage() {
     # Print the percentage of used RAM
-    # We use free and awk to calculate the percentage of used memory
     echo $(free | awk '/Mem/{printf("%.2f%"), $3/$2 * 100.0}')
 }
 
 get_disk_usage() {
     # Print the percentage of used disk space on the root partition
-    # We use df and awk to calculate the percentage of used disk space
     echo $(df / | awk 'NR==2 {print $5}')
+}
+
+get_battery_status() {
+    # Get the output of acpi
+    acpi_output=$(acpi)
+
+    # Extract the battery percentage
+    battery_percentage=$(echo "$acpi_output" | awk -F', ' '{print $2}')
+
+    # Extract the battery status (Charging or Discharging)
+    battery_status=$(echo "$acpi_output" | awk -F': ' '{print $2}' | awk '{print $1}')
+
+    if [[ "$battery_status" == "Charging," ]]; then
+        battery_status_code=1
+    else
+        battery_status_code=0
+    fi
+
+    # Output the results
+    echo "$battery_status_code $battery_percentage"
 }
 
 while true; do
     cpu_usage=$(get_cpu_usage)
     ram_usage=$(get_ram_usage)
     disk_usage=$(get_disk_usage)
+    battery_status=$(get_battery_status)
     date_output=$(date +'%a %-d %b %H:%M')
 
-    echo "<span font=\"11\">CPU <b>[$cpu_usage]</b> RAM <b>[$ram_usage]</b> DISK <b>[$disk_usage]</b> $date_output</span>"
+    # Display the system information in the Swaybar format
+    echo "<span font=\"11\">CPU <b>[$cpu_usage]</b> RAM <b>[$ram_usage]</b> DISK <b>[$disk_usage]</b> BATTERY <b>[$battery_status]</b> $date_output</span>"
+    
+    # Sleep for 5 seconds before updating the display again
     sleep 5
 done

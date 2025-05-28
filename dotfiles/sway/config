@@ -11,8 +11,8 @@ set $menu kickoff | xargs swaymsg exec --
 ### Output configuration
 exec_always swaybg -c 0c0c0c
 # Monitors
-output DP-1     pos 0    0 mode 1920x1080@143.998Hz
-output HDMI-A-1 pos 1920 0 mode 1920x1080@143.998Hz
+#output DP-1     pos 0    0 mode 1920x1080@143.998Hz
+#output HDMI-A-1 pos 1920 0 mode 1920x1080@143.998Hz
 
 ### Idle configuration
 exec swayidle -w \
@@ -84,8 +84,8 @@ exec /usr/libexec/xdg-desktop-portal-wlr
 # Workspaces:
 #
     # Assign workspaces to correct monitors
-    workspace 1 output DP-1
-    workspace 2 output HDMI-A-1
+    #workspace 1 output DP-1
+    #workspace 2 output HDMI-A-1
 
     # Switch to workspace
     bindsym $mod+1 workspace number 1

@@ -1,8 +1,8 @@
-export WLR_DRM_DEVICES=/dev/dri/card1
+#export WLR_DRM_DEVICES=/dev/dri/card1
 
 export VK_KHR_surface=wayland
-export VDPAU_DRIVER=radeonsi
-export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
+#export VDPAU_DRIVER=radeonsi
+#export MESA_LOADER_DRIVER_OVERRIDE=radeonsi
 
 export TERM=alacritty
 export BROWSER=librewolf
