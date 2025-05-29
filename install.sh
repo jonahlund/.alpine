@@ -6,6 +6,9 @@ DIR=$( dirname -- "$( readlink -f -- "$0"; )"; )
 echo "Installing development packages..."
 sudo apk add build-base openssl-dev fontconfig-dev bash curl wget libxkbcommon-dev libxkbfile-dev mold
 
+### Install locales
+sudo apk add musl-locales musl-locales-lang
+
 ### Install and configure nftables
 sudo apk add nftables
 sudo rc-update add nftables boot

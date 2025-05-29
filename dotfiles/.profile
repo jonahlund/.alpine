@@ -28,3 +28,5 @@ fi
 
 export PATH=$PATH:$HOME/.alpine/bin
 export HELIX_RUNTIME=/usr/share/helix/runtime
+
+export MUSL_LOCPATH=/usr/share/i18n/locales/musl
